@@ -1,4 +1,4 @@
-#tst
+
 def change_calculator():
     """Takes valid input and calculates difference in monetary change"""
     change = {"£20": 2000, "£10": 1000, "£5": 500, "£2": 200, "£1": 100, "50p": 50, "20p": 20,
