@@ -1,0 +1,300 @@
+import random   #to shuffle cards
+
+#Cards - individual cards
+suits = ('Hearts', 'Diamonds', 'Spades', 'Clubs')
+ranks = ('Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace')
+values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8, 'Nine':9, 'Ten':10, 'Jack':10,
+         'Queen':10, 'King':10, 'Ace':11}                                                   
+
+playing = True
+
+#########################################
+#Global variables set to capture the fundamentals of a card i.e. suit and ranks. Set as global because it will be called throughout code 
+#Values is created because the game requires card to be added for a total value. Cannot compare string so a dictionary is used
+#########################################
+
+
+#Card - To create individual card objects as we need all 52 cards for the game Blackjack.
+class Card():                                                       
+    def __init__(self, suit, rank):
+        self.suit = suit
+        self.rank = rank
+
+
+    def __str__(self):                                              #convert object into string
+        return self.rank + " of " + self.suit
+
+
+#########################################
+#Parameters "suit" & "rank" are called because they are attributes of a card and otherwise cannot print object as string i.e. __str__
+#my_card = Card(suits[1], "3")
+#print(my_card) >>> 3 of Clubs
+#########################################
+
+
+#Deck - To produce entire deck of 52 cards. Featuring methods to shuffle deck and deal one card
+
+class Deck():
+    def __init__(self):                 
+        self.deck = []
+        for each_suit in suits:                                 #> Reads "For each suit in suits(global variable) and for each..."
+            for each_rank in ranks:                             #> rank in ranks (global variable). add to self.deck (empty list)"
+                self.deck.append(Card(each_suit, each_rank))    #>
+
+    def shuffle_deck(self):
+        random.shuffle(self.deck)       #ability to shuffle deck when called
+
+    def deal_one(self):
+        return self.deck.pop()          #now self.deck has all 52 cards. We can now uses .pop() to take one card
+
+#########################################
+#Note deck is not a parameter in __init__. This is because the deck of cards doesn't need to be amended by user in any way... 
+#when the deck is called. e.g. my_deck = Deck()
+#self.deck is empty list [] so that cards can be added via for loop.
+#########################################
+
+#Hand - for player and dealer(computer) to hold card. Also check for aces. 
+
+class Hand():
+    def __init__(self):
+        self.cards = []                 #empty list so that cards can be appended to
+        self.value = 0                  #>benchmarked at 0 so it acts as counter for total value and number of aces
+        self.aces = 0                   #>
+    
+    def add_card(self, card): #card is outside parameter to be used during logic. Deck.deal_one() will be called to obtain card
+        self.cards.append(card)
+        self.value += values[card.rank] #identify value of card by calling global variable "values", with class Card.rank attribute
+        if card.rank == "Ace":
+            self.aces += 1
+
+    def adjust_for_aces(self):
+        while self.value > 21 and self.aces > 0:        #ace is value 11 as per global variable "values".
+            self.value -= 10                            #Code reads "if total value is greater than 21 and an ace is held"
+            self.aces -= 1                              #"10 is deducted from total value >>> ace now becomes 1"
+                                                        #This allows each ace to be 11 or 1 depending on total value
+
+#########################################
+#No parameters required in __init__ as we do not require user input
+#class Hand has been created to work in line with other classes. This is why card is an outside parameter in add_card. Deck.deal_one() will be called to obtain card
+#e.g. my_deck = Deck()  
+#     my_hand = Hand()   
+#     my_hand.add_card(my_deck.deal_one())
+#values[card.rank] - EXPLAINATION - a card object will be produced during add_card method. this card object can use its attributes
+#that are present in class Card (.rank). This allows us to identify value of card. It refers to the global variable values,
+#then matches the card.rank with the matching value
+#########################################
+
+
+#Chips - to keep track of players bets won and lost and ongoing winnings
+
+class Chips:
+    def __init__(self):          #paramater total set as default to 100. Alternatively could allow user to input starting total
+        self.total = 100 
+        self.bet = 0                        #set as 0 as counter 
+        
+    def win_bet(self):
+        self.total += self.bet
+
+    def lose_bet(self):
+        self.total -= self.bet
+ 
+
+#########################################
+#if bet is won, bet is added to total. if bet is lost, bet deducted from total
+#########################################
+
+
+#Step 6: Write a function for taking bets
+
+def take_bet(chips):
+    print("\n")
+    while True:
+        try:
+            chips.bet = int(input("How many chips would you like to bet?"))
+        except ValueError:
+            print("Bets must be integers")
+        else: 
+            if chips.bet > chips.total:                                             #.bet & .total because it is utilising attributes from Chips class
+                print("DECLINED! You do not have enough chips. Current total:£",chips.total)
+            else:
+                break
+#########################################
+#when an instance of the object class Chips is created. Function take_bet can be called because there is now a chip object
+#this is why .bet and .total are called. They are attributes from class Chips
+#e.g. player_chips = Chips(100)
+#     print(take_bet(player_chips))
+#########################################
+
+
+#Step 7: Write a function for taking hits
+
+def hit(deck,hand):
+    hand.add_card(deck.deal_one())
+    hand.adjust_for_aces()
+
+#########################################
+#Function to use during logic to allow us to deal extra card if player wishes to accept another card to get closer to 21
+#parameter deck and hand are present because objects of class Deck and Hand will be called as those parameters
+#e.g. my_deck = Deck()
+#     my_deck.shuffle_deck()
+#     my_hand = Hand()
+#     my_hand.add_card(my_deck.deal_one())
+#     my_hand.add_card(my_deck.deal_one())
+#     hit(my_deck,my_hand)
+
+#     for _ in my_hand.cards:
+#     print(_)
+#########################################
+
+
+#Step 8: Write a function prompting the Player to Hit or Stand
+
+def hit_or_stand(deck,hand):
+    global playing  # to control an upcoming while loop. Alternatively playing can also be set in parameter
+    
+    while True:
+        hit_or_stand = input("Would you like to Hit or Stand?. Enter H(hit) or S(stand):\t")
+        if hit_or_stand[0].upper() == "H":
+            hit(deck,hand)
+
+        elif hit_or_stand[0].upper() == "S":
+            print("Player stands. Dealer's turn")
+            playing = False
+        
+        else:
+            print("Please try again. Enter H to deal another card or S to decline another card")
+            print("The aim of the game is to get a value of 21 or as close as possible with your two cards")
+            continue
+        break
+
+#########################################
+#While loop to ask if player would like to hit or stand
+#if HIT - carry out hit function i.e. add card
+#if STAND - exit out of while loop i.e. playing = False
+#else - error message for further clarification on instructions of game
+#########################################
+
+
+#Step 9: Write functions to display cards
+#Players card should be visible whilst dealer has one card visible. At the end, dealer cards will be visible
+
+def show_some(player,dealer):
+    #Dealer's hand - one hidden
+    print("\nDealer's hand:")
+    print(" <card hidden>")
+    print(dealer.cards[1])  
+    
+    #Players hand - 2 cards
+    print("\nPlayer's hand:")
+    for _ in player.cards:
+        print(_)
+
+#########################################
+#player and dealer parameter set because they will be hand objects for player hand and dealer hand of cards
+#.cards is called to reveal what cards players are holding. .cards come from class Hand
+#to reveal player cards, we could copy code from dealer e.g. print(dealer.card[0]). However player will receive more than two cards which why for loop is used
+#SHORTCUT - instead of for loop, could use >>> *player.cards, sep='\n'
+######################################### 
+    
+def show_all(player,dealer):
+    #Dealer's hand - all cards
+    print("\nDealer's hand:")
+    for _ in dealer.cards:                              
+        print(_)
+    #Dealer's hand - value
+    print(f"Value of Dealer's hand = {dealer.value}")
+   
+    #Player's hand - all cards
+    print("\nPlayer's hand:", *player.cards, sep="\n")                                   
+    #Player's hand - value
+    print(f"Value of Players's hand = {player.value}")
+
+#########################################
+#*player.cards << This is a shortcut that has same function as loop. It will iterate through each item
+#sep="\n"      << This creates a new line for each item iterated
+######################################### 
+
+
+#Step 10: Write functions to handle end of game scenarios
+#Remember to pass player's hand, dealer's hand and chips as needed.
+
+def player_busts(player,dealer,chips):
+    print("\n")
+    print("PLAYER BUST!! Dealer wins")
+    chips.lose_bet()
+
+def player_wins(player,dealer,chips):
+    print("PLAYER WINS!!")
+    chips.win_bet()
+
+def dealer_busts(player,dealer,chips):
+    print("DEALER BUST!! Player wins")
+    chips.win_bet()
+    
+def dealer_wins(player,dealer,chips):
+    print("DEALER WINS!!")
+    chips.lose_bet()
+    
+def push(player,dealer):
+    print("Dealer and Player tie! It's a push.")
+
+#########################################
+#########################################
+
+##LOGIC##
+player_chips = Chips()
+while playing:
+    print("\n")
+    print("Welcome to Blackjack.")
+    print("The aim of the card game is to get a total value of or as close to 21 whilst having a total value of cards greater than the dealers")
+
+    game_deck = Deck()
+    game_deck.shuffle_deck()                                                #Deck shuffled
+
+    player_cards = Hand()
+    player_cards.add_card(game_deck.deal_one())
+    player_cards.add_card(game_deck.deal_one())                             #Player hand
+
+    dealer_cards = Hand()
+    dealer_cards.add_card(game_deck.deal_one())
+    dealer_cards.add_card(game_deck.deal_one())                             #Dealer hand
+
+    #player chips
+    take_bet(player_chips)                                                  #Take bet
+    show_some(player_cards,dealer_cards)                                    #show cards
+
+
+    while playing:
+        hit_or_stand(game_deck,player_cards)                                #Hit or stand - player 
+        show_some(player_cards,dealer_cards)                                #Show cards
+
+        if player_cards.value > 21:                                         #If player value is over 21
+            show_all(player_cards,dealer_cards)                             #Show all cards
+            player_busts(player_cards,dealer_cards,player_chips)    
+            break                                                           #Result - player bust
+            
+    
+    if player_cards.value <= 21:
+        while dealer_cards.value < 17:                                     
+            hit(game_deck,dealer_cards)
+        show_all(player_cards,dealer_cards) 
+
+        if dealer_cards.value > 21:
+            dealer_busts(player_cards,dealer_cards,player_chips)
+        elif dealer_cards.value > player_cards.value:
+            dealer_wins(player_cards,dealer_cards,player_chips)
+        elif dealer_cards.value < player_cards.value:
+            player_wins(player_cards,dealer_cards,player_chips)
+        else:
+            push(player_cards,dealer_cards)
+    
+    print("Player winnings stand at: £", player_chips.total)
+    
+    new_game = input("Would you like to play another hand? Enter 'y' or 'n' ")
+    
+    if new_game[0].lower()=='y':
+        playing=True
+        continue
+    else:
+        print("Thanks for playing!")
+        break

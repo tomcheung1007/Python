@@ -1,0 +1,105 @@
+
+#BASIC example. Class, Object, Methods & Attributes - intention to understand structure 
+
+class Dog():            
+
+    species = "Mammal"      #Class object attribute - This is used when an attribute is going to be the same for all instances in said Class. e.g. for Dog, all dogs are mammals
+ 
+    def __init__(self, breed, name, colour, spots):         
+        self.breed = breed                                  #>
+        self.name = name                                    #>Individually these are known as attributes
+        self.colour = colour                                #>As a whole, including method below, when called as an instance i.e. my_dog, it is known as an object    
+        self.myspots = spots                                #>
+
+    #METHODS - are functions defined inside class, used to carry out actions/operations on an object
+    def bark(self,age):             #Methods can also take outside arguments i.e. number. As it is outside, it doesn't require self.number         
+        print("BORK!! My name is {}. BORK!! My age is {}".format(self.name,age))     #fstring formatting doesn't work | Must reference instance i.e. self.name, self.breed because it will search within object.                                                  
+my_dog = Dog("Labrador", "Sam", "Yellow", False)
+my_dog2 = Dog("Bulldog", "Phil", "Brown", True)
+
+
+print(my_dog.breed)         #Calling attribute - No need for ()       
+                            #KEY DIFFERENCE between attributes and methods is the way they're called 
+my_dog.bark(10)             #Calling method - Use () . Input number because it is an outside argument, it isnt searched within object, instead user inputs nunmber
+my_dog2.bark(7)
+
+#Above is example for basic understanding. Can be much more complex
+
+
+#EXAMPLE - FYI Attributes doesnt necessarily have to be referenced in paramater call e.g .self.area/diameter... 
+#Circumference could also feature within attribute however for the purpose of this example to build understanding of structure, it is kept as a method
+
+#More complex examples could have basic attributes in the attributes section and complex functions in methods for readability 
+
+class Circle():
+
+    pi = 3.14       #Class object attribute - because it will apply for all instances. 
+
+    def __init__(self, radius):      #Can have default value i.e. radius=1. It will be overwritten when called
+        #ATTRIBUTES
+        self.radius = radius
+        self.area = radius * radius * Circle.pi 
+        self.diameter = radius * radius
+
+    def __str__(self):
+        return f'Circle has the following attributes:\nRadius:{self.radius}\nArea:{self.area}\nDiameter:{self.diameter}\nCircumference:{self.get_circumference()}\n'
+
+        #METHODS
+    def get_circumference(self):
+        return self.radius * Circle.pi * 2              #Circle.pi not self.pi as pi in this instance is a class object attribute - More readable 
+
+
+my_circle = Circle(24)                  #24 entered as argument for radius
+print(my_circle.radius)                 #When calling radius, user input i.e. Circle(24) overrides default value i.e radius=1. OUTPUT >>> 24
+print(my_circle.area)
+print(my_circle.diameter)
+print(my_circle.get_circumference())
+
+print(my_circle)
+
+
+class Account():
+    
+    def __init__ (self,owner,balance):
+        self.owner = owner
+        self.balance = balance
+    
+    def __str__(self):              #convert object into string
+        return f'Account owner:   {self.owner}\nAccount balance: £{self.balance}'
+
+    def deposit(self,amount):
+        self.balance = self.balance + amount
+        print("\n")
+        print("____________________________________________")
+        print(f"Thankyou, £{amount} added to balance")
+        print(f"Total balance:\t £{self.balance}")
+        print("\n")
+        print(acct)
+        print("____________________________________________")
+
+
+    def withdraw(self,amount):
+        if amount > self.balance:
+            print("\n")
+            print("____________________________________________")
+            print(f"Request to withdraw £{amount} is declined")
+            print(f"Not enough funds. Total balance:\t £{self.balance}")
+            print("\n")
+            print(acct)
+            print("____________________________________________")
+        else:
+            print("\n")
+            print("____________________________________________")
+            self.balance = self.balance - amount
+            print(f"Thankyou, £{amount} deducted from balance")
+            print(f"Total balance:\t £{self.balance}")
+            print("\n")
+            print(acct)
+            print("____________________________________________")
+
+
+acct = Account("Tom", 100)
+print(acct.balance)
+acct.deposit(500)
+acct.deposit(1429)
+print(acct)

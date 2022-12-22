@@ -1,0 +1,55 @@
+#args - arguments
+#kwargs - key word arguments
+
+#If you use arg and kwarg together, arg always comes before kwarg
+
+#Allows you to enter as multiple arguments. Keeps code clean and readable 
+#Used when there are an unknown number of arguments 
+
+
+def myfunc(a,b,c=0): #without *args you would have to keep adding arguments i.e. d=0,e=0. =0 is used in case it isnt needed
+    return sum((a,b,c))*0.05
+print(myfunc(40,60))
+
+def myfunc_2 (*args): #*args allows you to put as many arguments in whilst keeping code readable
+    return sum (args) * 0.05
+print(myfunc_2(40,60,30,20,50,70)) 
+
+#**kwargs - builds dictionary of key value pairs
+def myfunc_3(**kwargs):
+    if "fruit" in kwargs:
+        print("my fruit of choice is {}".format(kwargs["fruit3"]))
+    if "vegtable" in kwargs:
+        print("my vegtable of choice is {}".format(kwargs["vegtable2"]))
+    else:
+        print("I didnt find any fruit")
+myfunc_3(fruit = "Orange", fruit2 = "Apple", fruit3 = "Banana", vegtable = "Lettuce", vegtable2 = "Broccoli")
+
+def concatenate(**kwargs):
+    result = ""
+    # Iterating over the Python kwargs dictionary
+    for _ in kwargs.values(): #.values() to print values (just like dictionary)
+        result += _
+    return result
+print(concatenate(a="Real", b="Python", c="Is", d="Great", e="!"))
+
+def myfunc_4 (*arg, **kwarg):
+    print("I would like {} {}".format(arg[1],kwarg["animal"]))
+myfunc_4(10,20,30, fruit="oranges", food="eggs", animal="dogs")
+
+
+def user_details(**kwarg):
+    for key,value in kwarg.items(): #.items() to unpack 
+        print ("{} : {}".format(key,value))
+
+user_details(Firstname="Tom", Lastname="Zilla", Email="Zilla@nomail.com", Country="Zilanda", Age=25, Phone=9876543210)
+
+
+def capital_cities(**kwargs): 
+    # initialize an empty list to store the end result
+    result = []
+    for key,value in kwargs.items():
+        result.append("The capital city of {} is {}".format(key,value))
+    return result
+
+capital_cities(China = "Beijing", Cairo = "Egypt", Italy = "Rome")

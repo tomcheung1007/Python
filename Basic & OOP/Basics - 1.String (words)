@@ -1,0 +1,48 @@
+#New line - print("Abi\nTaylor")
+#Quotation - print("Abi\"Taylor")
+ 
+gf = "Abi Taylor"
+print(gf + " is cool") #Abi is cool
+
+#Fuction - convert string to upper or lower case e.g. print(phrase.lower/upper)
+print(gf.lower)
+#Length of string - print(len(phrase))
+#Replace word - print(phrase.replace("Abi", "Tom"))
+
+# \n = new line
+# \t = tab space
+# len = length of string (include spaces)
+
+#Concatenate - combining strings
+phrase = "Arctic Monkeys"
+phrase_2 = " R U Mine"
+print (phrase + " is my favourte band." + phrase_2 + " is my favourite album")   
+
+#Float formatting
+phrase = "Arctic Monkeys"
+phrase_2 = " R U Mine"
+print(f"{phrase} is my favourite band. {phrase_2} is ny favourite album.")
+
+result = 987/324
+print ("The result was {r:1.3f}".format(r=result))
+
+score = "1-0"
+team1 = "Manchester United"
+team2 = "Atletico Madrid"
+print(f"{team2} is winning against {team1}. The score is {score}")
+
+#.format = String formatting
+print("The {w} table looked {m}".format(w="wooden", m="metal", s="steel", g="good", b="bad", a="amazing", t="terrible"))
+
+#Slicing
+example = "tom needs to go to work"
+print(example[0:4])
+
+#Indexing - Use square brackets
+name = "Tom Cheung"
+print (name[0]) #t
+print (name[-1]) #g
+print (name[0:5]) #tom c
+
+name = "tom cheung"
+print(name.title()) #.title() capitalises the first letters of each word

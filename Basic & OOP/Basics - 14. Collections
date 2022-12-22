@@ -1,0 +1,61 @@
+#Collections are a special type of container for storing data. A tuple, dictionary and list are all examples of containers.
+#Collections module were later introduced to Python to improve and add more functionalities 
+
+#Collections are an alternative to the general purpose containers such as tuples, dictionaries etc because it comes with different functions
+#There may be times where the use of collections is more suitable than  general purpose containers depending on the struture of your data and what you need to achieve
+
+from collections import Counter #Counter is a subtype of the container dictionary, it's function is to count and provide a key value pair 
+
+mylist = [2,2,2,2,2,21,1,1,1,1,13,3,3,3,3,3,3,3] 
+print(Counter(mylist))
+
+mystring = ("iouhsefsuidhfiwuefhalieuhfaileudfhbvaileyrugbpWUOEHFaerilughaieurghiauerhg")
+print(Counter(mystring))
+
+mysentence = ("hello, my name is tom and this is an example of splitting a sentence and using the collections counter to count each word")
+print(Counter(mysentence.lower().split()))
+
+myletters = ("ddddddddddddssssssaaaaaaaaaaawwwwwwwwwwwwwww")
+#When Counter is passed as an obect, it comes with another of functions like .pop, .append etc. 
+x = Counter(myletters)
+
+print(x.most_common())
+
+from collections import defaultdict #defaultdict assigns a default value to a key if the key isnt originally inside the dictionary. A normal dictionary would produce an error
+
+#Example of normal dictionary, when a key is called but isnt in the dictionary, a KeyError is produced
+dict = {"X":1}
+#print(dict["X"]) # >>> 1
+#print(dict["b"]) # >>> KeyError: "b"
+
+
+d = defaultdict(lambda: 0)
+d["a"] = 1
+d["b"] = 2
+print(d["a"]) #>>> 1
+print(d["b"]) #>>> 2
+print(d["c"]) #>>> 0 this is because we have set the default value as 0
+
+
+people = {'Nik': 'Toronto', 'Kate': 'Toronto', 'Evan': 'London', 'Kyra': 'New York', 'Jane': 'New York'}
+locations = defaultdict(list)
+
+for person, location in people.items():
+    locations[location].append(person)
+
+print(locations["UK"])
+locations['UK'].append("Tom")
+print(locations)
+# Returns: defaultdict(<class 'list'>, {'Toronto': ['Nik', 'Kate'], 'London': ['Evan'], 'New York': ['Kyra', 'Jane']})
+
+data = [('Groceries', 12.34), ('Entertainment', 5.40), ('Groceries', 53.45), 
+        ('Video Games', 65.32), ('Groceries', 33.12), ('Entertainment', 15.44), 
+        ('Groceries', 34.45), ('Video Games', 32.22)]
+
+accumulated = defaultdict(float)
+for category, amount in data:
+    accumulated[category] += amount
+
+print(accumulated)
+
+# Returns: defaultdict(<class 'int'>, {'Groceries': 133.36, 'Entertainment': 20.84, 'Video Games': 97.54})

@@ -1,0 +1,46 @@
+In Alien invasion, the player controls a rocket ship. 
+The objective is to shoot the aliens that fill the screen and prevent them from making contact with the rocket ship or reaching the bottom of the screen
+As the game progresses, difficulty increases
+
+Game rules
+- shoot all aliens to move onto next level
+- 3 lives- lives are lost if alien touches rocket ship or reaches bottom of screen
+- after game is complete, display score
+
+Basic requirements 
+
+Settings 
+    - game screen     
+        - height
+        - width
+        - background colour
+    - ship speed
+
+Game set 
+    - 3 lives
+
+Rocket ship - player controllable
+    - image
+    - movement
+        - left
+        - right
+    - shoots lasers - space bar
+
+Aliens
+    - number of aliens on screen
+    - increase number of aliens in each level
+    - moves left and right 
+    - moves down
+
+logic
+    - set game up
+    - run game 
+        - check events
+        - update ship
+        - update screen
+    - event loop
+
+
+
+
+

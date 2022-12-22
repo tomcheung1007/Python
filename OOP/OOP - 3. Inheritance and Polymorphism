@@ -1,0 +1,73 @@
+#Inheritance - way to form new class objects using classes that are already defined 
+
+class Animal():                     #class Animal serves as "base class"
+    def __init__(self):
+        print("Animal created")
+    
+    def eat(self):
+        print("I am eating")   
+    
+    def who_am_i(self):
+        print("I am an animal")
+
+#Newly formed classes can use the base class to inherit any of the required methods 
+
+class Dog(Animal):              #animal class is called to inherit required features from Animal class
+    def __init__ (self):
+        Animal.__init__(self)   #structure to inherit required features
+
+    def who_am_i(self):
+        print("I am a dog")     #If you want to overwrite inherited method, all you need to do is rewrite the method using the same name
+
+    def bark(self):
+        print("BORK!!")
+
+my_dog = Dog()
+my_dog.eat()                    #.eat method doesnt sit within Dog class. Instead we inherit it from Animal class
+my_dog.who_am_i()               #Now outputs >>> "I am a dog" because we overwritten it above
+
+#############################
+
+#Polymorphism - means having many forms. In python, polymorphism means the same function/method name being used for different types 
+#To perform the same action in different ways
+#e.g. in-built function len can be used on string, list, dictionary etc
+
+#Here we have created two classes. The method .speak() features in both classes. Polymorphism allows us the method without being concerned about class type
+class Dog():
+    def __init__ (self,name,):
+        self.name = name
+
+    def speak(self):
+        return self.name + " says Bork!!"
+
+class Cat():
+    def __init__ (self,name,):
+        self.name = name
+
+    def speak(self):
+        return self.name + " says Meow!!"
+
+Sam = Dog("Sam")
+Prince = Cat("Prince")
+
+print(Sam.speak())                  #>>>Sam says Bork!!
+print(Prince.speak())               #>>>Prince says Meow!!
+
+### Example to demonstrate polymorphism through function
+
+def pet_speak(pet):                 #This function, pet_speak has no association to the method .speak() yet it allows us to execute method
+    print(pet.speak())
+
+pet_speak(Sam)                      #>>>Sam says Bork!!
+pet_speak(Prince)                   #>>>Prince says Meow!!
+
+
+
+#Abstract class and inheritance
+
+class Animal():
+    def __init__ (self,name):
+        self.name = name
+
+    def speak(self):
+        raise NotImplementedError("Subclass must implement this abstract method")

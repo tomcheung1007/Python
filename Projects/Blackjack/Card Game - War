@@ -1,0 +1,160 @@
+
+import random           #to randomise(shuffle) cards
+
+#Deck of cards
+suits = ('Hearts', 'Diamonds', 'Spades', 'Clubs')
+ranks = ('Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace')
+values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8,        #Dictionary of values required because you need way to compare cards. 
+        'Nine':9, 'Ten':10, 'Jack':11, 'Queen':12, 'King':13, 'Ace':14}                 #Cannot compare strings however you can compare integers
+
+class Card():
+    
+    def __init__(self, suit, rank):
+        self.suit = suit
+        self.rank = rank
+        self.value = values[rank]           #[rank] because this is what the user will pass i.e. rank of card. Must be exact as rank in values dictionary
+    
+    def __str__(self):
+        return self.rank + " of " + self.suit
+        ##          5        of      Diamonds
+
+#five_diamonds = Card(suits[1], "Five")
+#print(five_diamonds.value) >>>5
+#print(five_diamonds.rank)  >>>"Five"
+#print(five_diamonds.suit)  >>>"Diamonds"
+
+
+#We can now create a card, we can create a class to create the whole deck
+
+class Deck:
+    
+    def __init__(self):
+        self.all_cards = []                      #Empty list for cards to be placed in
+        for each_suit in suits:                             #>    
+            for each_rank in ranks:                              #>This section of code reads:
+                self.all_cards.append(Card(each_suit,each_rank)) #> "for every rank in each suit, add the suit and rank to self.allcards (empty list)"
+
+    def shuffle(self):
+
+        random.shuffle(self.all_cards)
+        
+    def deal_one(self):
+        # Note we remove one card from the list of all_cards
+        return self.all_cards.pop()   
+
+my_deck = Deck()
+
+##### - for loop to print all cards
+#for _ in my_deck.all_cards:
+    #print(_)
+
+##### - shuffle cards and then for loop to print all cards
+#my_deck.shuffle()
+#for _ in my_deck.all_cards:
+    #print(_)
+
+##### - deal one card
+#print(my_deck.deal_one())
+
+class Player():
+    def __init__(self,name):
+        self.name = name
+        self.allcards = []
+
+    def remove_one(self):
+        return self.allcards.pop(0)         #index 0 to take card from beginning i.e. top of deck
+
+    def add_cards (self, new_cards):
+        if type(new_cards) == type([]):
+            self.allcards.extend(new_cards) #for list of multiple cards
+        else:
+            self.allcards.append(new_cards) #for single card
+
+    def __str__ (self):
+        return f"{self.name} has {len(self.allcards)} cards"
+
+#player_1 = Player("Tom")
+
+#can add card
+#player_1.add_cards(five_diamonds)
+
+#can add multiple cards
+#player_1.add_cards([five_diamonds, five_diamonds])
+#print(player_1)
+
+#can remove card
+#player_1.remove_one()
+#print(player_1)
+
+#############################   GAME LOGIC   ################################
+
+#Setting up game
+player_1_deck = Player("Tom")                #>Instance of players
+player_2_deck = Player("Abi")                #>
+
+new_deck = Deck()                       #Instance of deck of cards
+new_deck.shuffle()                      #Shuffle cards           
+
+for x in range(26):                             #26 because there are 52 cards in deck
+    player_1_deck.add_cards(new_deck.deal_one())     
+    player_2_deck.add_cards(new_deck.deal_one())
+
+#while game_on
+game_on = True
+round_num = 0
+
+while game_on:
+    round_num +=1
+    print(f"Round {round_num}.")
+
+#If players out of cards
+    if len(player_1_deck.allcards) == 0: 
+        print("Player 1 out of cards. Player 2 wins!")
+        game_on = False
+    if len(player_2_deck.allcards) == 0:
+        print("Player 2 out of cards. Player 1 wins!")
+        game_on = False
+
+#if players have cards - new round      #Note - player_1.allcards is the cards facing down. player_1_card is current card in play
+    player_1_card = []                     
+    player_1_card.append(player_1_deck.remove_one())     #Add card from player_1 deck
+    
+    player_2_card = []
+    player_2_card.append(player_2_deck.remove_one())
+    
+
+    #while at_war
+    at_war = True
+
+    while at_war:
+        #if player 1 card is stronger. Player 1 keeps card and takes player 2 card
+        if player_1_card[-1].value > player_2_card[-1].value:           #[-1] because want to compare most recent card pulled. Not the top card [0]
+            player_1_deck.add_cards(player_1_card)
+            player_1_deck.add_cards(player_2_card)
+            at_war = False
+
+        #if player 2 card is stronger. Player 2 keeps card and takes player 1 card
+        elif player_1_card[-1].value < player_2_card[-1].value:
+            player_2_deck.add_cards(player_1_card)
+            player_2_deck.add_cards(player_2_card)
+            at_war = False
+
+        else:
+            print("WAR!!")
+            if len(player_1_deck.allcards) <5:
+                print("Player 1 out of cards. Player 2 wins!")
+                game_on = False
+                break
+
+            elif len(player_2_deck.allcards) <5:
+                print("Player 2 out of cards. Player 1 wins!")
+                game_on = False
+                break
+
+            else:
+                for num in range(5):
+                    player_1_card.append(player_1_deck.remove_one())
+                    player_2_card.append(player_2_deck.remove_one())
+
+
+

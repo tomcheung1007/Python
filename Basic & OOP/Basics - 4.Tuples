@@ -1,0 +1,22 @@
+#Tuples use ()
+#Tuples are similar to list however are immutable
+
+#Tuples are used in more advanced programming. Mainly when passing objects within program and need to ensure it isnt changed. 
+
+#Tuple unpacking - using for loops
+tup = [(1,2), (3,4), (4,5), (6,7), (7,8), (9,10)] #data structure is very common i.e. tuples within lists
+for _ in tup:
+    print(_)
+
+tup = [(1,2), (3,4), (4,5), (6,7), (7,8), (9,10)]
+for a,b in tup: #a,b unpacks tuple e.g. a = 1st item of tuple and b = 2nd item of tuple
+    print(a)
+    
+#dictionary unpacking using for loop
+fruit = {"Apple":"£0.45", "Orange":"£0.87" ,"Banana":"£0.34"}
+for _ in fruit.items(): #.items() is needed for unpacking
+    print(_)
+
+fruit = {"Apple":"£0.45", "Orange":"£0.87" ,"Banana":"£0.34"} #e.g. key is apple and value is £0.45
+for key,value in fruit.items():
+    print(value)

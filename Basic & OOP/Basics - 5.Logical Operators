@@ -1,0 +1,10 @@
+# and / or / not
+
+#example1 and is when both conditions are true/false
+23<45 and 45<60 (True)
+
+#example 2 or is when either one of conditions is true/false
+1==1 or 2==1 (True)
+
+#example 3 not returns opposite boolean of what you did 
+34<12 (True)

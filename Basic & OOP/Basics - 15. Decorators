@@ -1,0 +1,107 @@
+#Decorators allow you to add new functionality (more code) to an already existing function at the flick of a switch. 
+
+#Without decorators, you have two options
+#   1. Add more code to current existing function, the downfall to this is you lose the original function that you had amended
+#   2. Create brand new function that contains old code and then add new code to it, the downfall to this is time consuming  
+
+#Decorators allow you to "decorate" functions which allows you to add extra functionality to an already exisiting function
+
+#To understand decorators, it is important to know that functions are objects which means functions can be passed in to variables or other functions/objects
+
+#FUNCTION AS OBJECT
+def hello(name = "Tom"):
+    return "Hello " + name 
+
+print(hello()) #>>> Hello Tom
+
+greet = hello 
+print(greet()) #>>> Hello Tom
+
+#in this example we have created the function hello and then passed the function as a variable greet. When we then print greet, it executes the hello function
+##########################
+
+
+#FUNCTION WITHIN FUNCTIONS
+def hello(name = 'Tom'):
+    print('The hello() function has been executed')
+    
+    def greet():
+        return '\t This is inside the greet() function'
+    
+    def welcome():
+        return "\t This is inside the welcome() function"
+    
+    print(greet())
+    print(welcome())
+    print("Now we are back inside the hello() function")
+
+hello()
+#This example highlights how you can have functions inside other functions. Note how the nested functions are indented. 
+##########################
+
+
+#RETURNING FUNCTIONS
+def hello(name = 'Tom'):
+    
+    def greet():
+        return '\t This is inside the greet() function'
+    
+    def welcome():
+        return "\t This is inside the welcome() function"
+    
+    if name == 'Tom':
+        return greet
+    else:
+        return welcome
+
+x = hello() 
+print(x()) #>>>          This is inside the greet() function
+x = hello("Jim") 
+print(x()) #>>>          This is inside the welcome() function
+
+#This example shows we can return functions. When returning functions () is not required,
+##########################
+
+#FUNCTIONS AS ARGUMENTS
+def hello():
+    return 'Hi Jose!'
+
+def other(func):
+    print('Other code would go here')
+    print(func())
+
+other(hello) #>>> Other code would go here
+             #>>> Hi Jose!
+
+#We can pass the funtion hello() as the argument/parameter for the function other()
+##########################
+
+#DECORATOR EXAMPLE
+def new_decorator(func):
+
+    def wrap_func():
+        print("Code would be here, before executing the func")
+
+        func()
+
+        print("Code here will execute after the func")
+
+    return wrap_func
+
+def func_needs_decorator():
+    print("This function is in need of a Decorator")
+
+func_needs_decorator = new_decorator(func_needs_decorator)
+func_needs_decorator()
+
+#The above is the same as below
+
+@new_decorator
+def func_needs_decorator():
+    print("This function is in need of a Decorator")
+
+func_needs_decorator()
+
+#The @ symbol is used for decorators. you @ the function you want to act as the decorator and below is the function you wish to decorate
+##########################
+

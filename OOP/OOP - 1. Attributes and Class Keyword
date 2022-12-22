@@ -1,0 +1,46 @@
+#Object Orientated Progamming - OOP 
+
+#OOP allows you to create code that is repeatable and organised. For much larger scripts of code, functions alone aren't enough for organisation and repeatability 
+#e.g. think of the built in methods that you can use on lists, dictionaries, typles >> .sort() .append(). OOP follows same principle to allow you to create your own defined methods and attributes
+
+example = "Hello" #"Hello" is an object of the class type str
+
+print(example.upper()) 
+#The method .upper() is acting on a specific object i.e. "Hello" which comes under the type str
+x = 1
+print(x.upper())        #AttributeError: 'int' object has no attribute 'upper'
+
+#THE ABOVE EXAMPLE HIGHLIGHTS WHAT WE CAN DO WITH OBJECTS IS BASED ON THE TYPE OF CLASS THEY ARE 
+
+#OOP allows you to create classes which pretty much can be anything based on what your target outcome is
+#Its usefulness may not be clear at first but it will once you delve more into it
+
+#Class is the template/blueprint for creating objects e.g. vehicle class to create cars. The class defines the way in which objects interact with code
+#Object e.g. my_dog is a collection of variables and functions 
+
+##########
+
+class Dog():                                                
+    def __init__(self, breed, name, colour, spots):         # __init__ is called as a constructor for a class. self represents the instance of the class. Followed by parameters  
+        self.breed = breed                                  #This section is creating the user defined attributes
+        self.name = name
+        self.colour = colour
+        self.myspots = spots                                #Expect Boolean - True / False. Doesnt always have to be string                          
+my_dog = Dog("Labrador", "Sam", "Yellow", False)
+
+print(my_dog.myspots)                                         #Now when calling my_dog, there are multiple attributes i.e. .spots, .breed, .colour
+
+####### - See below how the variable breed doesnt neccessarily need to be the same. But by convention, you use the same parameter name. Confusing at first but once you're more familiar, will make sense
+
+class Dog():
+    def __init__(self, mybreed):      
+        self.jelly = mybreed          
+
+my_dog = Dog(mybreed = "Labrador")
+
+print(my_dog.jelly)
+
+
+#######
+
+

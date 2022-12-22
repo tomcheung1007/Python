@@ -1,0 +1,61 @@
+
+#range - to create list from one number to another
+print(list(range(0,11)))
+print(list(range(0,11,2))) #,2 = in steps of 2
+
+myList = list(range(1,11)) 
+print(myList)
+
+for _ in range(0,20):
+    print(_)
+
+#enumerate - acts as a counter for collection i.e. tuple, list, dictionary. Adds a counter as the key
+list = ["Brad", "Ollie", "Mike", "Shaun", "Sean", "Tom", "Stapes", "Hos", "Dan", "Jon"]
+dict_1 = {
+    "height_1":"170cm", "weight_1":"80kg",
+    "height_2":"170cm", "weight_2":"142kg",
+    "height_3":"198cm", "weight_3":"96kg"}
+tup = [(1,2), (3,4), (4,5), (6,7), (7,8), (9,10)]
+
+for _ in enumerate(list):
+    print(_)
+
+for a,b in enumerate(list): #a,b to unpack tuple
+    print(a)
+
+#zip - pairs items together and returns as tuple (like a zip)
+myNumbers = [1,2,3]
+myLetters = ["A","B","C"]
+myItems = ["Dog", "Cat", "Frog"]
+
+for _ in zip(myNumbers, myLetters):
+    print(_)
+
+for a,b,c in zip(myNumbers, myLetters): #a,b,c to unpack tuple
+    print(_)
+
+#in - to check if item is in string, list, dictionary
+print("x" in [a,b,c]) # False
+print("x" in ["x","y","z"])
+
+#min and max
+myList = [1,2,3,4]
+print(min(myList))
+print(max(myList))
+
+
+#randomlibrary - shuffle
+from random import shuffle
+myList = [0,1,2,3,4,5,6,7,8,9]
+
+shuffle(myList)
+print(myList)
+
+#randomlibrary - grab random integer
+from random import randint
+print(randint(0,100))
+
+#input - for user input
+name = input ("enter your name: ")
+age = input ("enter your age:")
+print("Hello " + name + "! You are " + age)

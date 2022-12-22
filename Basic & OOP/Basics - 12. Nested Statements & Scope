@@ -1,0 +1,68 @@
+#Nested Statements & Scope
+#Important to understand how Python deals with various names assigned.
+
+#Scope determines visibility of variable name to other parts of code.
+#Important to understand to reduce common errors
+
+#example
+x = 25
+def printer():
+    x = 50
+    return x
+print(x) # >>> 25
+print(printer()) # >>> 50
+# output is based on scope. Scope allows Python to understand which variables are referenced
+
+#LEGB RULE - Python will follow the below rules in said order to determine what variable is referenced
+
+#L : Local - names assigned in any way within function (def or lambda)
+#E : Enclosing function locals. Names in the local scope if any and all enclosing functions, from outer to inner
+#G : Global - names assigned at top level i.e. x=25 (above)
+#B : Built in - names preassigned in the built in names module
+
+#example of local
+def printer():
+    x = 50 # variable x is local and assigned within function
+    return x
+
+#example of enclosing function locals
+
+name = "This is a global string" #example of global
+def greet():
+    name = "Tom" #example of enclosing
+    def hello ():
+        print("Hello " + name)
+    print(hello())
+print(greet()) # >>> "Hello Tom". Example of enclosing function locals because name is defined as "Tom" in def greet
+
+# if name = "Tom" is removed. >>> "Hello This is a global string". Because it follows LEGB rule to global
+
+#1. Checks for any variable reference within function
+#2. Checks surrounding function 
+#3. Checks global
+#4. Checks built in functions
+
+
+name = "This is a global string" #example of global position
+def greet():
+    name = "enclosing" #example of enclosing position
+    def hello ():
+        name = "local" # example of local position
+        print("Hello " + name)
+    print(hello())
+print(greet())
+
+#scope - variables work within the scope of code it sits in e.g. above >>> "Hello local"
+
+
+x=5
+def func (x):
+    print(f"X is {x}") #>>> X is 5
+
+    x = 200
+    print(f"I changed X to {x}") #>>> I changed X to 200
+
+print(func(x))
+print(x) # >>> 5 
+
+#x changes value based on the position of where it sits. e.g. globally, outside of function x is 5. Within function it changes to 200

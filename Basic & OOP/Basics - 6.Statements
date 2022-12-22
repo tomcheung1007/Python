@@ -1,0 +1,70 @@
+#statements used to for CONTROL FLOW - when we want certain code to execute when particular conditions are met
+
+#if - if condition is met - execute code
+#elif - if other condition is met - execute code
+#else - if above conditions isnt met - execute code
+
+#example 1
+currentTemp = -20
+tempHigh = 40.7
+tempLow = -18.9
+if currentTemp > tempLow and currentTemp < tempHigh:
+    print("Current temperature (" + str(currentTemp) + ") is between high and low extremes.")
+elif currentTemp > tempLow and currentTemp > tempHigh:
+    print("Current temperature (" + str(currentTemp) + ") is record high.")
+elif currentTemp < tempLow and currentTemp < tempHigh:
+    print("Current temperature (" + str(currentTemp) + ") is record low.")
+
+#example 2
+dietCoke = True
+fries = False
+shake = False
+extraBurger = True
+
+if dietCoke and fries and shake and extraBurger:
+    print("The customer wants:")
+    print("- Diet instead of regular coke")
+    print("- Extra french fries")
+    print("- A milkshake")
+    print("- An extra burger") 
+else:
+    print("The customer doesn't want full meal.")
+
+#example 3
+noSalt = True
+dietCoke = False
+fries = False
+shake = False
+
+if noSalt or dietCoke or fries or shake:
+    print("Optional extras for order:")
+    print("No salt:\t\t", noSalt)
+    print("Diet coke:\t\t", dietCoke)
+    print("French fries:\t\t", fries)
+    print("Milkshake:\t\t", shake)
+else:
+    print("No extras needed for this order. Please proceed.")
+
+#example 4
+def max_num (num1, num2, num3):
+    if num1 >= num2 and num1 >= num3:
+        return num1
+    elif num2>= num1 and num2 >= num3:
+        return num2 
+    else:
+        return num3 
+
+print(max_num(34, 56, 57))  
+
+
+#example 5 + combine if with input
+name = input ("enter your name: ")
+
+if name == ("Tom"):
+    print("Hello Tom")
+elif name ==("Thomas"):
+    print("Hello Thomas")
+else:
+    print ("You don't know your own name")
+
+

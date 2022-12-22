@@ -1,0 +1,66 @@
+
+#dictionaires use curly braces {}
+#dictionaires use key value pairing in contrast to lists. This allows you to grab items within dictionaires without needing to know index location
+
+#cannot sort dictionary = immutable
+#lists can be sorted = mutable 
+
+#example 1
+dict_1 = {
+    "height_1":"170cm", "weight_1":"80kg",
+    "height_2":"170cm", "weight_2":"142kg",
+    "height_3":"198cm", "weight_3":"96kg"}
+print(dict_1["height_1"])
+
+#example 2
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964}
+print(thisdict["year"])
+
+#why a dictionary can be more suitbale than list
+food_prices = {
+    "apple":"£0.67",
+    "banana":"£0.29",
+    "orange":"£0.45",
+    "avacado":"£0.87",
+    "doritos":"£1.75",
+    "pringles":"£2.00",}
+print(food_prices["apple"])
+
+#add to dictionary
+food_prices = {
+    "apple":"£0.67",
+    "banana":"£0.29",
+    "orange":"£0.45",
+    "avacado":"£0.87",
+    "doritos":"£1.75",
+    "pringles":"£2.00",}
+food_prices["Wotsits"] = "£1.25"
+print(food_prices)
+
+#dictionaries can hold lists and further dictionaires
+dictionary_containing_list_and_another_dictionary = {
+    "apple":"£0.67",
+    "banana":"£0.29",
+    "orange":"£0.45",
+    "avacado":"£0.87",
+    "doritos":"£1.75",
+    "pringles":"£2.00",
+    "friends": ["Brad", "Ollie", "Mike", "Shaun", "Sean", "Tom", "Stapes", "Hos", "Dan", "Jon"],
+    "music_playlist": {"mp1":"Bakermat", "mp2":"Arctic Monkeys", "mp3":"Macklemore"}}
+
+print(dictionary_containing_list_and_another_dictionary["music_playlist"]["mp2"])
+
+#grab all values or keys
+food_prices = {
+    "apple":"£0.67",
+    "banana":"£0.29",
+    "orange":"£0.45",
+    "avacado":"£0.87",
+    "doritos":"£1.75",
+    "pringles":"£2.00",
+}
+print(food_prices.keys())
+print(food_prices.values())

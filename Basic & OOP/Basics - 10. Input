@@ -1,0 +1,68 @@
+name = input ("enter your name: ")
+age = input ("enter your age:")
+print("Hello " + name + "! You are " + age)
+
+#e.g. Hello Tom! You are 25
+
+#Calculator 
+#int - whole number - no decimal point
+#float - decimel number
+num1 = input ("enter a number: ")
+num2 = input ("enter another number: ")
+result = float(num1) + float(num2) 
+print(result)
+
+#Better Calculator
+num1 = float (input ("enter first number: "))
+op = input ("enter operator: ")
+num2 = float (input ("enter first number: "))
+
+if op == "+":
+    print (num1 + num2)
+elif op == "-":
+    print (num1-num2)
+elif op == "/":
+    print (num1 / num2)
+elif op == "*":
+    print (num1*num2)
+else:
+    print ("invalid operator")
+
+
+#Example - madlib
+noun = input ("enter a noun")
+verb = input ("enter a verb")
+name = input ("enter your name")
+location = input ("enter your location")
+color = input ("enter your favourite color")
+
+print ("there was a " + noun)
+print ("who enjoyed " + verb)
+print ("his name was " + name)
+print ("he came from " + location)
+print ("his poo was " + color)
+
+import pyinputplus as pyip
+import random, time
+def multiplication_quiz():
+    number_of_questions = 10
+    correct_answers = 0
+
+    for question in range(number_of_questions):
+        num1 = random.randint(0,9)
+        num2 = random.randint(0,9)
+        prompt = f"{question}: {num1} X {num2} =\t"
+
+        try:
+            pyip.inputStr(prompt, allowRegexes=[f'^{num1*num2}$'],
+                                blockRegexes=[('.*', "Incorrect!")],
+                                timeout=8, limit=3)
+        except pyip.TimeoutException:
+            print("Out of time!")
+        except pyip.RetryLimitException:
+            print("Out of attempts!")
+        else:
+            print("Correct!")
+            correct_answers += 1
+        time.sleep(1)
+    print(f"Score: {correct_answers} / {number_of_questions}")

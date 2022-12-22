@@ -1,0 +1,48 @@
+#Lists are structures to store large amounts of data
+#use square brackets for lists []
+
+friends = ["Brad", "Ollie", "Mike", "Shaun", "Sean", "Tom", "Stapes", "Hos", "Dan", "Jon"]
+lucky_numbers = ["10", "29", "7", "8", "12"]
+
+
+friends.extend(lucky_numbers) #add another list to current list
+friends.append("Brad") #add element to end of list
+friends.insert(1, "Bob") #add element to list in specific indexed position
+friends.remove ("Bob") #remove element from list
+friends.clear() #remove everything off list
+friends.index("Mike") #search for element in list
+friends.count ("Jack") #count how many times element appears in list
+friends.sort() #sort from ascending/descending order
+friends2 = friends.copy() #create copy of list
+
+print(friends)
+
+#identify how many items within list
+size = len(friends)
+print(size)
+
+#numerical list shortcut 
+a = list(range(1,101))
+print(a)
+
+#list comprehension - shortcut for lists
+myString = "hello"
+myList = []
+for _ in myString:
+    myList.append(_)
+
+myList = [_ for _ in myString] #produces same result as above, but code is condense to one line 
+print(myList)
+
+myList = [_ for _ in range(0,11)]
+print(myList) #[0,1,2,3,4,5,6,7,8,9,10]
+
+myList = [_ for _ in range(0,11) if _%2==0]
+print(myList) #[0,2,4,6,8,10]
+
+celcius = [2, 6, 14, 17, 23, 31, 48]
+farenheit = []
+farenheit =[(((9/5)*_+32)) for _ in celcius]
+
+for _ in celcius:
+    farenheit.append(((9/5)*_+32))

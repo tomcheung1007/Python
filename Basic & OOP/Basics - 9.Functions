@@ -1,0 +1,115 @@
+#function syntax = def
+#fuctions allow you to group code so that you do not have to repeatedly copy and paste preivous code
+#must have ()
+#use return over print because when using return, the result can be saved as variable
+#functions are determined by what code is allocated to it
+
+#examples of simple functions
+def say_hello (name): # defining the fuction. Can be worded in anyway.
+    print("hello "+ name) # action of function - what you want it to do
+say_hello("Thomas") # execute function
+
+def say_hello (name):
+    print(f"Hello {name}") # utilising f.string formatting
+say_hello("Abi")
+
+def add_function(num1, num2):
+    return num1+num2 # return is used instead of print because return saves result as variable. Print cannot do this (will produce error)
+result = add_function(4,5) 
+print(result) 
+print(result + 30) # i.e. 9 + 30
+
+def even_check(_):
+    result = _ %2 ==0
+    return(result)
+print(even_check(43))
+
+def even_check(_):
+    return _ % 2 == 0 # is the same as above but in one line instead
+print(even_check(43))
+
+#combining statements in functions
+#task - check if any number in list is even
+def even_check_list(numList):
+    for _ in numList:
+        if _ % 2 == 0:
+            return True #return can also be seen as breaking out of function.
+        else:
+            pass
+    return False 
+# *IMPORTANT* returnFalse not in line with returnTrue. Cannot be done at same time
+print(even_check_list([2,3,6]))
+
+#return all even numbers in list
+even_numbers = []
+def even_check_list(numList):
+    for _ in numList:
+        if _ % 2 == 0:
+            even_numbers.append(_)
+        else:
+            pass
+    return even_numbers
+print(even_check_list([1,2,3,4,5,6,7,8,9]))
+
+#functions with tuple unpacking
+#task - find out who has worked the highest working hours
+work_hours = [("Abi",55), ("Tom",30), ("Stapes",56)]
+
+def employee_check (total_hours):
+    current_max = 0 #placeholder variable. Why 0? To allow comparison of working hours for first individual 
+    top_employee = " "
+
+    for name,hours in work_hours:
+        if hours>current_max:
+            current_max = hours
+            top_employee = name
+        else:
+            pass
+    return(top_employee, current_max)
+print(employee_check(work_hours)) #produces "Stapes, 56"
+
+#can be unpacked further via below 
+name,hours = (employee_check(work_hours)) 
+print(name) #produces "Stapes"
+
+
+#cup and ball game - example of linking multiple functions together
+from random import shuffle
+#shuffle list
+myList = [" ", "0", " "]
+def shuffle_list(myList):
+    shuffle(myList)
+    return myList
+#input guess
+def player_guess():
+    guess = " "
+    while guess not in ["0", "1", "2"]:
+        guess = input("Pick a number: 0, 1 or 2:")
+    return int(guess)
+#check guess with list
+def check_guess(myList,guess):
+    if myList[guess] == "0":
+        print("Correct")
+    else:
+        print("Wrong")
+        print(myList)
+#script
+#shuffle list
+myList = [" ", "0", " "]
+mixed_list = shuffle_list(myList)
+#input guess
+guess = player_guess()
+#check guess with list
+check_guess(mixed_list,guess)
+
+def smaller_num(x, y): ## Can be rephrased to  def smaller_num(x, y):
+    if x > y:          ##                          if x > y:
+        number = y     ##                              return y
+    else:              ##                          else:
+        number = x     ##                              return x
+    return number
+
+x = (input("Enter first number:-"))
+y = (input("Enter second number:-"))
+result = smaller_num(x, y)
+print("The smaller number between " +  str(x) + " and " + str(y) + " is " + str(result))

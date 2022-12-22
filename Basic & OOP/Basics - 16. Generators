@@ -1,0 +1,65 @@
+#Generator are used within functions. The keyword is yield
+#Generators allow you to receive values from a function  one at a time. Each time you call the generator, the next value will be provided
+#In contrast to holding everything in memory, generators allow you to generate values as you go along 
+
+#The difference between functions and generator functions is that generator functions are passed as object before it can be generate/iterate values one at a time
+
+def gencube(_):
+    for num in range(_):
+        yield num**3
+
+#>>> 0
+#>>> 1
+#>>> 8
+#>>> 27
+#>>> 64
+#>>> 125
+#>>> 216
+#>>> 343
+#>>> 512
+#>>> 729
+
+#assign function as object. This allows us to use the next() function to obtain the sequence of values one at a time.
+y = gencube(10)
+
+print(next(y))
+#>>> 0
+print(next(y))
+#>>> 1
+print(next(y))
+
+#next() calls the next value in the sequence of the for loop. iter() allows us to use next() on objects
+ 
+str = 'hello'
+
+z = iter(str)
+
+print(next(z))
+print(next(z))
+print(next(z))
+
+def fibonacci(n):
+    a=0
+    b=1
+    for _ in range(n):
+        yield a
+        a,b = b,a+b
+        #0,1 = 1,1
+        #1,1 = 1,2
+        #1,2 = 2,3
+        #2,3 = 3,5
+        #3,5 = 5,8
+        #5,8 = 8,13
+        #8,13 = 13,21
+f = fibonacci(10)
+
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+#0 1 1 2 3 5 8 13 21
