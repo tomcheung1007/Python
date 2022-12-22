@@ -1,25 +1,30 @@
-#Map - built in function that works on a collection of data i.e. tuple, list, dictionary. 
-#Used when you want to apply a single transformation to all items within collection of data
+# Map - built in function that works on a collection of data i.e. tuple, list, dictionary.
+# Used when you want to apply a single transformation to all items within collection of data
 
-#example
-#**MAP**
-def squareNum (i):         # name of function
-    return i**2            # action of function
-num = [1,2,3,4,5]         # data for function to use
+# example
+# **MAP**
+def squareNum(i):  # name of function
+    return i ** 2  # action of function
 
-for _ in map(squareNum,num): # for each number in map(use "sqaureNum" function for "num"). Print each number
+
+num = [1, 2, 3, 4, 5]  # data for function to use
+
+for _ in map(squareNum, num):  # for each number in map(use "sqaureNum" function for "num"). Print each number
     print(_)
 
+
 ### example - comparison between map and for loop
-def splicer (mystring):
+def splicer(mystring):
     if len(mystring) % 2 == 0:
         return "Even"
     else:
-        return mystring 
-name = ["Abi", "Jack", "Daniel", "Scott", "Steve", "Brad"]
-print(list(map(splicer,name))) #must print into list otherwise error will occur
+        return mystring
 
-#The below produces same result as above.
+
+name = ["Abi", "Jack", "Daniel", "Scott", "Steve", "Brad"]
+print(list(map(splicer, name)))  # must print into list otherwise error will occur
+
+# The below produces same result as above.
 new_name_list = []
 for _ in name:
     if len(_) % 2 == 0:
@@ -29,29 +34,35 @@ for _ in name:
 
 print(new_name_list)
 
+
 ###################
 
-#**FILTER**
-#filters work on a collection of data similar to map. Filter result based on function condition
+# **FILTER**
+# filters work on a collection of data similar to map. Filter result based on function condition
 def even_check(_):
     return _ % 2 == 0
-mynums = [1,2,3,4,5,6,7,8]
-print(list(filter(even_check,mynums)))
-    
-#**LAMBDA**
-#lambda - known as anonymous function, as you wouldnt use it often in your code. Intend to use once
-def square (num):
-    return num**2
+
+
+mynums = [1, 2, 3, 4, 5, 6, 7, 8]
+print(list(filter(even_check, mynums)))
+
+
+# **LAMBDA**
+# lambda - known as anonymous function, as you wouldnt use it often in your code. Intend to use once
+def square(num):
+    return num ** 2
+
+
 print(square(3))
-#lambda function can take any number of arguments, but can only have one expression.
-lambda num : num**2 #lambda arguments : expression
+# lambda function can take any number of arguments, but can only have one expression.
+lambda num: num ** 2  # lambda arguments : expression
 print(square(5))
 
-x = lambda a, b, c: a * b  #not usually assigned i.e. x =.  Mainly used in conjuction with function
-print(x(5, 6, 7)) #expression is a(5) * b(6) = 30 
+x = lambda a, b, c: a * b  # not usually assigned i.e. x =.  Mainly used in conjuction with function
+print(x(5, 6, 7))  # expression is a(5) * b(6) = 30
 
-#lambda with filter. lambda can be used inline with filter 
-print(list(filter(lambda num:num%2 == 0, mynums)))
+# lambda with filter. lambda can be used inline with filter
+print(list(filter(lambda num: num % 2 == 0, mynums)))
 
-#lambda with map
-print(list(map(lambda num:num**2, mynums)))
+# lambda with map
+print(list(map(lambda num: num ** 2, mynums)))

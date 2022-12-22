@@ -15,9 +15,9 @@ def fib(n):
     else:
         while count < n:
             print(a)
-            nth = a + b
+            c = a + b
             a = b
-            b = nth
+            b = c
             count += 1
 
 fib(10)
