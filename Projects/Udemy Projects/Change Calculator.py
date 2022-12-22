@@ -48,5 +48,3 @@ def change_calculator():
 
 
 change_calculator()
-
-print("TEST")
