@@ -48,4 +48,3 @@ def change_calculator():
 
 
 change_calculator()
-
