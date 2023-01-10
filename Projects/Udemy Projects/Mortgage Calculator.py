@@ -1,7 +1,8 @@
 import time
+# Mortgage calculator takes user input to obtain information to provide summary
 
 def mortgage_info():
-    """takes input to calculate mortgage payments and duration"""
+    """valid input to get amount, duration and interest rate"""
     total_amount = True
     total_years = True
     interest_rate = True
@@ -24,18 +25,27 @@ def mortgage_info():
         interest = float(input("Enter interest rate:\t"))
         break
 
-    # mortgage calculations
-    total_months = years * 12
-    monthly_pay = amount_borrowed / total_months
-    monthly_interest = (interest / 100 * amount_borrowed) / 12
+    return amount_borrowed, years, interest
 
-    # display information
+
+def monthly_calculations(amount, years, interest):
+    """uses mortgage_info() and calculate monthly payment, years and interest"""
+    total_months = years * 12
+    monthly_pay = amount / total_months
+    monthly_interest = (interest / 100 * amount) / 12
+
+    return total_months, monthly_pay, monthly_interest
+
+
+def mortgage_calculator():
+    """provide summary of mortgage details"""
+    amount, years, interest = mortgage_info()
+    total_months, monthly_pay, monthly_interest = monthly_calculations(amount, years, interest)
     print(f"""\nSummary:
-Amount borrowed: £{amount_borrowed}
+Amount borrowed: £{amount}
 Duration of mortgage: {total_months} months
 Interest rate: {interest}%""")
-    time.sleep(1)
-
+    time.sleep(2)
     print(f"""
 Monthly payments: £{round(monthly_pay, 2)}
 Monthly interest: £{monthly_interest}\n""")
@@ -43,14 +53,11 @@ Monthly interest: £{monthly_interest}\n""")
 
     print("Number of years to pay mortgage taking into account interest")
     count = 0
-    while amount_borrowed > 0:
-        amount_borrowed -= monthly_pay
-        amount_borrowed += monthly_interest
+    while amount > 0:
+        amount -= monthly_pay
+        amount += monthly_interest
         count += 1
-
-    print(round(count/12))
-
-mortgage_info()
+    print(round(count / 12))
 
 
-
+print(mortgage_calculator())
