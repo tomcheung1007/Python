@@ -51,13 +51,13 @@ Monthly payments: £{round(monthly_pay, 2)}
 Monthly interest: £{monthly_interest}\n""")
     time.sleep(2)
 
-    print("Number of years to pay mortgage taking into account interest")
+    print("Number of years to pay mortgage taking into account interest:")
     count = 0
     while amount > 0:
         amount -= monthly_pay
         amount += monthly_interest
         count += 1
-    print(round(count / 12))
+    return round(count / 12)
 
 
 print(mortgage_calculator())

@@ -60,7 +60,7 @@ def change_owed(difference):
     for k, v in change.items():
         if difference == v:
             result.append(k)
-    print(result)
+    return result
 
 
 print(change_calculator())
