@@ -58,7 +58,8 @@ mo2 = phoneRegex.search('My number is 555-4242')
 print(mo2.group())
 
 # FIND ALL()
-# while search() will return the first matched object. findall() will return all matched objects. using findall() doesnt require groups() method
+# while search() will return the first matched object.
+# findall() will return all matched objects. using findall() doesnt require groups() method
 
 phoneNumRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')  # without groups in regrex
 print(phoneNumRegex.findall('Cell: 415-555-9999 Work: 212-555-0000'))  # >>> ['415-555-9999', '212-555-0000']
@@ -67,12 +68,13 @@ phoneNumRegex = re.compile(r'(\d\d\d)-(\d\d\d)-(\d\d\d\d)')  # with grouped rege
 print(phoneNumRegex.findall(
     'Cell: 415-555-9999 Work: 212-555-0000'))  # >>> [('415', '555', '9999'), ('212', '555', '0000')]
 
-# SPECIAL CHARACTERS
-# ? Optional matching - group preceding ?, if present in string, produce match, otherwise carry on with regex search. Is not required to appear in matched string
-# * Zero or more -  group that precedes * can occur any number of times or it can be absent and will still produce match. Is not required to appear in matched string
-# + One or more - group that precedes + must appear at least once or more in matched string
-# {} Specific repetitions - e.g. (r'(Ha){3}') == 'HaHaHa' / {3, } == three or more repetitions / {3,5} == 3 to 5 repetitions / {,5} == zero to five repetitions
-# .* Everything and anything - e.g. you want to match everything and anything that comes after 'First name:'
+# SPECIAL CHARACTERS ? Optional matching - group preceding ?, if present in string, produce match, otherwise carry on
+# with regex search. Is not required to appear in matched string * Zero or more -  group that precedes * can occur
+# any number of times or it can be absent and will still produce match. Is not required to appear in matched string +
+# One or more - group that precedes + must appear at least once or more in matched string {} Specific repetitions -
+# e.g. (r'(Ha){3}') == 'HaHaHa' / {3, } == three or more repetitions / {3,5} == 3 to 5 repetitions / {,5} == zero to
+# five repetitions .* Everything and anything - e.g. you want to match everything and anything that comes after
+# 'First name:'
 
 # \d - any numeric digit from 0 to 9
 # \w - any letter
