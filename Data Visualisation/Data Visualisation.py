@@ -35,7 +35,7 @@ fig, ax = plt.subplots()
 ax.set_title("Single plot using scatter()", fontsize=24)
 ax.set_xlabel("Value", fontsize=14)
 ax.set_ylabel("Square of Value", fontsize=14)
-ax.scatter(2, 4, s=200)  # coordinate, s argument refers to size of dots
+ax.scatter(2, 4, s=200)  # (x, y, size)
 
 # size of tick labels (values)
 ax.tick_params(axis="both", which="major", labelsize=14)
@@ -59,14 +59,36 @@ x = [_ for _ in range(0, 101)]
 y = [_**2 for _ in x]
 
 fig, ax = plt.subplots()
-ax.scatter(x, y, s=5, c=(0, 0.8, 0))  # colour = c
+ax.scatter(x, y, s=5, c=(0, 0.8, 0))  # c=colour§
 ax.set_title("Scatter graph using range to generate values", fontsize=24)
 ax.set_xlabel("Value", fontsize=14)
 ax.set_ylabel("Square of Value", fontsize=14)
 # size of tick labels (values)
 ax.tick_params(axis="both", which="major", labelsize=14)
 
+# EXAMPLE
+# Create a graph using Bank - Agency - data.csv file
+import matplotlib.pyplot as plt
+import csv
 
+file = "/Users/tomcheung/Downloads/Bank - Agency - data.csv"
+data = open(file, encoding="utf-8")
+csv_data = csv.reader(data)
+data_lines = list(csv_data)
+
+bank_shifts = [int(_[1]) for _ in data_lines[1:61]]
+agency_shifts = [int(_[2]) for _ in data_lines[1:61]]
+months = [_[0] for _ in data_lines[1:61]]
+
+fig, ax = plt.subplots()
+ax.plot(months, bank_shifts, agency_shifts, linewidth=2.5)
+
+ax.set_title("Bank and Agency shifts - 2018-2022", fontsize=15)
+ax.set_xlabel("Months", fontsize=7)
+ax.set_ylabel("Shifts", fontsize=7)
+
+ax.tick_params(axis="x", rotation=90, labelsize=5)  # rotation=n to rotate ticker
+ax.tick_params(axis="y", labelsize=5)
 plt.show()
 
 
