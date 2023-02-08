@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 # matplotlib comes with predefined styles for your data visualisation
 print("Graph styles")
 print(plt.style.available)
-plt.style.use('seaborn')
 
 # BASIC GRAPH
 # SUMMARY
@@ -59,7 +58,7 @@ x = [_ for _ in range(0, 101)]
 y = [_**2 for _ in x]
 
 fig, ax = plt.subplots()
-ax.scatter(x, y, s=5, c=(0, 0.8, 0))  # c=colour§
+ax.scatter(x, y, s=5, c="red")  # c=colour
 ax.set_title("Scatter graph using range to generate values", fontsize=24)
 ax.set_xlabel("Value", fontsize=14)
 ax.set_ylabel("Square of Value", fontsize=14)
@@ -81,8 +80,8 @@ agency_shifts = [int(_[2]) for _ in data_lines[1:61]]
 months = [_[0] for _ in data_lines[1:61]]
 
 fig, ax = plt.subplots()
-ax.plot(months, bank_shifts, agency_shifts, linewidth=2.5)
-
+ax.plot(months, agency_shifts, c="green", linewidth=1)
+ax.plot(months, bank_shifts, c="red", linewidth=1)
 ax.set_title("Bank and Agency shifts - 2018-2022", fontsize=15)
 ax.set_xlabel("Months", fontsize=7)
 ax.set_ylabel("Shifts", fontsize=7)

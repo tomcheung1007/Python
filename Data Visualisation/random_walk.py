@@ -1,6 +1,8 @@
 # A random walk is a path that has no clear directions and is dictated by random decisions
 # e.g. a drunk man's path where every step taken is random
 
+# It has real world applications in economics, mathematics and science
+
 from random import choice
 
 
@@ -14,15 +16,14 @@ class Random_Walk:
 
     def fill_walk(self):
         """calculate points in walk"""
-
         # while loop to generate points to max limit
         while len(self.x_value) < self.num_points:
             # decide direction to go and how far in that direction
-            x_direction = choice([1, -1])
+            x_direction = choice([1, -1])  # 1 = right , -1 = left
             x_distance = choice([0, 1, 2, 3, 4])
             x_step = x_direction * x_distance
 
-            y_direction = choice([1, -1])
+            y_direction = choice([1, -1])  # 1 = up, -1 = down
             y_distance = choice([0, 1, 2, 3, 4])
             y_step = y_direction * y_distance
 
@@ -36,3 +37,4 @@ class Random_Walk:
 
             self.x_value.append(x)
             self.y_value.append(y)
+
