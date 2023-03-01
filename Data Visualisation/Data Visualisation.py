@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+
 # matplotlib is a library for creating static, animated and interactive data visualisation
 
 # matplotlib comes with predefined styles for your data visualisation
@@ -27,7 +28,6 @@ ax.set_ylabel("Square of Value", fontsize=14)
 # size of tick labels (values)
 ax.tick_params(axis="both", labelsize=14)
 
-
 # PLOT SINGLE POINT USING SCATTER()
 fig, ax = plt.subplots()
 
@@ -38,7 +38,6 @@ ax.scatter(2, 4, s=200)  # (x, y, size)
 
 # size of tick labels (values)
 ax.tick_params(axis="both", which="major", labelsize=14)
-
 
 # PLOT SERIES OF POINTS USING SCATTER()
 
@@ -51,11 +50,10 @@ ax.set_title("Scatter graph using scatter()", fontsize=24)
 ax.set_xlabel("Value", fontsize=14)
 ax.set_ylabel("Square of Value", fontsize=14)
 
-
 # APPLYING FOR LOOPS TO GRAPHS
 
 x = [_ for _ in range(0, 101)]
-y = [_**2 for _ in x]
+y = [_ ** 2 for _ in x]
 
 fig, ax = plt.subplots()
 ax.scatter(x, y, s=5, c="red")  # c=colour
@@ -89,6 +87,30 @@ ax.set_ylabel("Shifts", fontsize=7)
 ax.tick_params(axis="x", rotation=90, labelsize=5)  # rotation=n to rotate ticker
 ax.tick_params(axis="y", labelsize=5)
 plt.show()
+
+
+# HISTOGRAM - Plotly
+
+from random import randint
+
+
+class Dice:
+    """class for single 6 sided die"""
+    def __init__(self, num_sides=6):
+        self.num_sides = num_sides
+
+    def roll(self):
+        """reenact roll of die"""
+        return randint(1,self.num_sides)
+
+
+die = Dice()
+roll_results = []
+
+for _ in range(101):
+    result = die.roll()
+    roll_results.append(result)
+
 
 
 
