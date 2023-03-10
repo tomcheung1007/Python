@@ -155,7 +155,7 @@ def expanded_form(num):
 
 # print(expanded_form(4030))
 
-def solution(s):
+def camel_split(s):
     """break up camel casing with space between words"""
     result = []
 
@@ -169,5 +169,44 @@ def solution(s):
     return "".join(result)  # convert list to string
 
 
+# print(camel_split("breakCamelCase"))
 
-print(solution("breakCamelCase"))
+
+def two_sum(numbers, target):
+    result = []
+    for _ in range(len(numbers)):
+        if numbers[_] + numbers[_-1] == target:
+            result.append(_)
+            result.append(_-1)
+            break
+    for _ in result:
+        if _ == -1:
+            result[_] = 2
+    return result
+
+# REFACTOR
+
+target = 4
+test = [2, 2, 3]
+lc = [(i, i-1) for i in range(len(test)) if test[i] + test[i-1] == target]
+result = []
+
+for _ in lc:
+    a, b = _
+
+result.append(a)
+result.append(b)
+
+print(result)
+
+
+
+
+
+
+
+
+
+
+
+

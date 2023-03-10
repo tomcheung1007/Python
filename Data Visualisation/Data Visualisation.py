@@ -88,28 +88,51 @@ ax.tick_params(axis="x", rotation=90, labelsize=5)  # rotation=n to rotate ticke
 ax.tick_params(axis="y", labelsize=5)
 plt.show()
 
+# EXAMPLE
+# Create a stacked bar chart on staff based on business travel
 
-# HISTOGRAM - Plotly
+file = "/Users/tomcheung/Python/Data quantspark/Metadata-Table 1.csv"
+data = open(file, encoding="utf-8")
+csv_data = csv.reader(data)
+data_lines = list(csv_data)
 
-from random import randint
+age_groups = ["Current", "Non-travel", "Frequently", "Rarely"]
+
+final = {
+    "18-32": [386, 6, 43, 81],
+    "33-46": [636, 6, 18, 55],
+    "47-60": [210, 2, 9, 21]
+}
+
+import numpy as np
+import matplotlib.pyplot as plt
+import csv
+def business_travel(group, results):
+    labels = list(results.keys())
+    data = np.array(list(results.values()))
+    data_cum = data.cumsum(axis=1)
+    category_colors = plt.colormaps["Accent_r"](np.linspace(0.15, 0.85, data.shape[1]))
+
+    fig, ax = plt.subplots(figsize=(9.2, 5))
+    ax.invert_yaxis()
+    ax.xaxis.set_visible(False)
+    ax.set_xlim(0, np.sum(data, axis=1).max())
+
+    for i, (colname, color) in enumerate(zip(group, category_colors)):
+        widths = data[:, i]
+        starts = data_cum[:, i] - widths
+        rects = ax.barh(labels, widths, left=starts, height=0.5, label=colname, color=color)
+
+        r, g, b, _ = color
+        text_color = "white" if r * g * b < 0.5 else "darkgrey"
+        ax.bar_label(rects, label_type="center", color=text_color)
+    ax.legend(ncols=len(group), bbox_to_anchor=(0, 1), loc="lower left", fontsize="small")
+
+    return fig, ax
 
 
-class Dice:
-    """class for single 6 sided die"""
-    def __init__(self, num_sides=6):
-        self.num_sides = num_sides
-
-    def roll(self):
-        """reenact roll of die"""
-        return randint(1,self.num_sides)
-
-
-die = Dice()
-roll_results = []
-
-for _ in range(101):
-    result = die.roll()
-    roll_results.append(result)
+business_travel(age_groups, final)
+plt.show()
 
 
 
