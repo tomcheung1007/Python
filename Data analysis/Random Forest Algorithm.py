@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, GridSearchCV  # import 'train_test_split'
 
 # ACCESSING THE DATA
-file = "/Users/tomcheung/Python/Data analysis/Metadata-Table 1.csv"
+file = "/Data analysis/Metadata-Table 1.csv"
 data = pd.read_csv(file)
 data_copy = data.copy()
 

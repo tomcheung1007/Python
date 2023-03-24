@@ -2,7 +2,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-file = "/Users/tomcheung/Python/Data analysis/Metadata-Table 1.csv"
+file = "/Data analysis/Metadata-Table 1.csv"
 
 # MAKE FILE ACCESSIBLE AND CHECK DATA
 data = pd.read_csv(file)
