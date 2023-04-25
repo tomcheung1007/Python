@@ -288,21 +288,191 @@ def clean_string(s):
 
 
 # print(clean_string('1A#?#EMC5[(3@C'))
-from collections import Counter
-def highest_rank(arr):
-    if arr:
-        c = Counter(arr)
-        m = max(c.values())
-        return max(k for k, v in c.items() if v == m)
+def spacify(string):
+    """add space between every character"""
+    result = ""
+    # for loop to add space
+    for _ in string:
+        result += _
+        result += " "
+    # to account for all cases, space may or may not be required at end
+    for _ in result[-2:]:  # last two characters
+        if _[0].isalnum():
+            return result.rstrip()
+        else:
+            return result[:-1]
+    return result
 
 
-#print(highest_rank([12, 10, 8, 8, 3, 3, 3, 3, 2, 4, 10, 12, 10] ))
-def cube_odd(arr):
-    if any(type(_) is not int for _ in arr):
-        return None
-    return sum(x ** 3 for x in arr if x % 2 != 0)
+# print(spacify("hello world"))
+def men_from_boys(arr):
+    """return array where even numbers ascend and then odd numbers descend"""
+    result = []
+
+    even = set([_ for _ in arr if _ % 2 == 0])
+    odd = set([_ for _ in arr if _ % 2 == 1])
+
+    even = sorted(even)  # ascending order
+    odd = sorted(odd, reverse=True)  # descending order
+
+    # add ordered arrays to result
+    for _ in even:
+        result.append(_)
+    for _ in odd:
+        result.append(_)
+
+    return result
 
 
+# print(men_from_boys([2,15,17,15,2,10,10,17,1,1]))
+def remove_rotten(bag_of_fruits):
+    """remove word "rotten" and return updated array all lowercase"""
+    try:
+        result = [_[6:].lower() if _[:6] == "rotten" else _.lower() for _ in bag_of_fruits]
+    except TypeError:
+        return []
+
+    return result
 
 
+#print(remove_rotten(["rottenApple","rottenBanana","rottenApple","rottenPineapple","rottenKiwi"]))
+def protein_synthesis(dna):
+    """Convert DNA to its  protein"""
+    # amino acid dictionary - amino acid: RNA
+    amino_acid = {"Ala": ["GCU", "GCC", "GCA", "GCG"], "Leu": ["UUA", "UUG", "CUU", "CUC", "CUA", "CUG"],
+                  "Arg": ["CGU", "CGC", "CGA", "CGG", "AGA", "AGG"], "Lys": ["AAA", "AAG"], "Asn": ["AAU", "AAC"],
+                  "Met": ["AUG"], "Asp": ["GAU", "GAC"], "Phe": ["UUU", "UUC"], "Cys": ["UGU", "UGC"], "Pro":
+                      ["CCU", "CCC", "CCA", "CCG"], "Gln": ["CAA", "CAG"],
+                  "Ser": ["UCU", "UCC", "UCA", "UCG", "AGU", "AGC"],
+                  "Glu": ["GAA", "GAG"], "Thr": ["ACU", "ACC", "ACA", "ACG"], "Gly": ["GGU", "GGC", "GGA", "GGG"],
+                  "Trp":["UGG"], "His": ["CAU", "CAC"], "Tyr": ["UAU", "UAC"], "Ile": ["AUU", "AUC", "AUA"], "Val":
+                      ["GUU", "GUC", "GUA", "GUG"], "Stop": ["UAG", "UGA", "UAA"]}
+    codon = []
+    protein = ""  # to return as output
+    #translate DNA to RNA
+    dna_to_rna = dna.maketrans("TAGC", "AUCG")
+    rna = dna.translate(dna_to_rna)
+
+    # split RNA into triplets
+    for _ in range(0, len(rna), 3):
+        codon.append(rna[_:_ + 3])
+
+    for c in codon:
+        for k, v in amino_acid.items():
+            if c in v:
+                protein += f"{k} "
+
+    return " ".join(codon), protein.rstrip()
+
+
+# print(protein_synthesis("GGCCGCCCATCAGCTTAAGGTAGAGAGCCACAATTGTTTATGAGAGTGATGGGGTCCGGTGGAGGTCCCC"))
+def solve(s):
+    alphabet = {chr(i): i - 96 for i in range(ord("a"), ord("z") + 1)}
+    c = ""
+    vowels = ["a", "e", "i", "o", "u"]
+
+    score = 0
+    # for loop to remove vowels from string
+    for _ in s:
+        if _ not in vowels:
+            c += _
+        elif _ in vowels:
+            c += " "
+
+    c_list = c.split(" ")
+
+    for x in c_list:
+        total = 0  # to compare scores
+        for _ in x:
+            if _ in alphabet:
+                total += alphabet[_]
+            if total > score:
+                score = total
+
+    return score
+
+
+# print(solve("zodiac"))
+import re
+
+def sum_of_integers_in_string(s):
+    return sum(int(x) for x in re.findall(r"\d+", s))
+
+
+# print(sum_of_integers_in_string("qeoihf238ryrejkfhhbv453yt493eifhurbvdfhvei123udchwiefh209"))
+def count_bits(n):
+    bit = []
+    num_list = []
+    x = 2
+
+    while n > 0:
+        y = n / x
+        num_list.append(y)
+        if y % 1 != 0:
+            y = int(y)
+            bit.append(1)
+        elif y % 1 == 0:
+            bit.append(0)
+        n = y
+    return bit.count(1)
+
+
+#print(count_bits(1234))
+def valid_braces(s):
+    """return bool if order of braces are valid"""
+    accepted = ["{}", "[]", "()"]  # for comparison of valid braces
+    confirmation = len(s) // 2  # minimum valid braces for True boolean
+
+    # valid braces are either immediately next to or on the equal opposite end of character
+    # use l and r as placeholders for iteration
+    l = 0  # next to character
+    r = -1 # opposite end
+
+    # for loop to create and store each brace combo
+    result = [] # to store brace combo
+    for _ in range(len(s) // confirmation):
+        x, y = f"{s[l]+s[l+1]}", f"{s[l]+s[r]}"
+        result.append(x)
+        result.append(y)
+        l += 1
+        r -= 1
+
+    # for loop to check if brace combos matches accepted list
+    check = []  # Append "YES" to confirm valid brace
+    for _ in result:
+        if _ in accepted:
+            check.append("YES")
+
+    return True if len(check) >= confirmation else False
+
+
+#print(valid_braces("({}}{[]})"))
+def valid_braces_v_2(string):
+    while '()' in string or '[]' in string or '{}' in string:
+        print(string)
+        string = string.replace('{}', '')
+        print(string)
+        string = string.replace('()', '')
+        print(string)
+        string = string.replace('[]', '')
+        print(string)
+    return not string
+
+
+#print(valid_braces_v_2(test))
+def in_array(array1, array2):
+    """return array in lexicographical order if string in array1 and array2 share same first letter"""
+    result = []  # to store results
+
+    # for loop to check if first letter of word in array1 matches in array2
+    for a1_word in array1:
+        for a2_word in array2:
+            if a1_word[0] == a2_word[0]:
+                result.append(a1_word)
+
+    result = dict.fromkeys(result)  # dict.fromkeys - way to remove duplicate
+    return sorted(list(dict.fromkeys(result)))  # return back to list and sorted
+
+
+# print(in_array(["live", "arp", "strong"], ["lively", "alive", "harp", "sharp", "armstrong"]))
 
