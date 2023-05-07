@@ -475,4 +475,143 @@ def in_array(array1, array2):
 
 
 # print(in_array(["live", "arp", "strong"], ["lively", "alive", "harp", "sharp", "armstrong"]))
+def max_tri_sum(numbers):
+    num_list = list(dict.fromkeys(sorted(numbers, reverse=True)))
+    return sum(num_list[:3])
 
+
+# print(max_tri_sum([2,1,8,0,6,4,8,6,2,4]))
+def alternate_case(s):
+    return "".join([_.lower() if _.isupper() else _.upper() for _ in s])
+
+
+# print(alternate_case("cODEwARS"))
+def tower_builder(n_floors):
+    x = (2*n_floors)-1
+    star = "*"
+    space = " "
+    result = [f"{space * ((x-_)//2)}{star*_}{space * ((x-_)//2)}" for _ in range(1, x+1, 2)]
+
+    return result
+
+
+# print(tower_builder(2))
+def rot13(message):
+    print(f"MESSAGE : {message}")
+    result = []
+    upper = [_ for _ in range(len(message)) if message[_].isupper()]
+
+    for _ in message:
+        if _.isalpha():
+            if _.isupper():
+                upper_c = ord(_)-64
+                if upper_c <= 13:
+                    upper_c += 13
+                else:
+                    upper_c -= 13
+                result.append(chr(upper_c+96))
+
+            else:
+                c = ord(_) - 96
+                if c <= 13:
+                    c += 13
+                else:
+                    c -= 13
+                result.append(chr(c+96))
+
+        elif _ == " ":
+            result.append(" ")
+        else:
+            result.append(_)
+
+
+    if upper:
+        for _ in upper:
+            c = result[_]
+            c = ord(c)-32
+            result[_] = chr(c)
+
+    return f"CIPHERED : {''.join(result)}"
+
+
+# print(rot13(Test))
+
+
+def dirReduc(arr):
+    print(arr)
+    for _ in range(len(arr) - 1):
+        if arr[_] == "NORTH":
+            if arr[_ + 1] == "SOUTH":
+                arr[_], arr[_ + 1] = "X", "X"
+
+        elif arr[_] == "SOUTH":
+            if arr[_ + 1] == "NORTH":
+                arr[_], arr[_ + 1] = "X", "X"
+
+        elif arr[_] == "WEST":
+            if arr[_ + 1] == "EAST":
+                arr[_], arr[_ + 1] = "X", "X"
+
+        elif arr[_] == "EAST":
+            if arr[_ + 1] == "WEST":
+                arr[_], arr[_ + 1] = "X", "X"
+
+
+    result = [_ for _ in arr if _ != "X"]
+
+    for _ in range(len(result) - 1):
+        if result[_] == "NORTH":
+            if result[_ + 1] == "SOUTH":
+                result[_], result[_ + 1] = "X", "X"
+
+        elif result[_] == "SOUTH":
+            if result[_ + 1] == "NORTH":
+                result[_], result[_ + 1] = "X", "X"
+
+        elif result[_] == "WEST":
+            if result[_ + 1] == "EAST":
+                result[_], result[_ + 1] = "X", "X"
+
+        elif result[_] == "EAST":
+            if result[_ + 1] == "WEST":
+                result[_], result[_ + 1] = "X", "X"
+
+    result = [_ for _ in result if _ != "X"]
+
+    for _ in range(len(result) - 1):
+        if result[_] == "NORTH":
+            if result[_ + 1] == "SOUTH":
+                result[_], result[_ + 1] = "X", "X"
+
+        elif result[_] == "SOUTH":
+            if result[_ + 1] == "NORTH":
+                result[_], result[_ + 1] = "X", "X"
+
+        elif result[_] == "WEST":
+            if result[_ + 1] == "EAST":
+                result[_], result[_ + 1] = "X", "X"
+
+        elif result[_] == "EAST":
+            if result[_ + 1] == "WEST":
+                result[_], result[_ + 1] = "X", "X"
+
+
+    return [_ for _ in result if _!= "X"]
+opposite = {'NORTH': 'SOUTH', 'EAST': 'WEST', 'SOUTH': 'NORTH', 'WEST': 'EAST'}
+# https://www.codewars.com/kata/550f22f4d758534c1100025a/solutions/python
+def dirReduc_V2(arr):
+    print(arr)
+    new_plan = []
+
+    for d in arr:
+        if new_plan and new_plan[-1] == opposite[d]:
+            print(f"new_plan:{new_plan}, new_plan[_-1]{new_plan[-1]}, opposite {opposite[d]}")
+            new_plan.pop()
+            print(new_plan, "POP")
+        else:
+            new_plan.append(d)
+            print(new_plan, "ADD")
+    return new_plan
+
+
+# print(dirReduc_V2(['NORTH', 'SOUTH', 'SOUTH', 'EAST', 'WEST', 'NORTH', 'WEST']))

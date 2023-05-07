@@ -1,26 +1,27 @@
 <!-- entries/templates/entries/entry_list.html -->
-<!-- This is the layout for the front end viewing overall lists of entries -->
 
 {% extends "entries/base.html" %}
 
-    {% block content %}
+{% block content %}
     <article>
         <h2 class="mark">{% now "Y-m-d H:i" %}</em></h2>
         <a href="{% url 'entry-create' %}"><button>Add new entry</button></a>
     </article>
     {% for entry in entry_list %}
         <article>
-            <!-- timestamp with special formatting. This allows styling via CSS -->
-            <!-- can access fields of Entry model i.e. models.py -->
             <h2 class="{{ entry.date_created|date:'l' }}">
-                {{ entry.date_created|date:'y-m-d H:i' }}
+                {{ entry.date_created|date:'Y-m-d H:i' }}
             </h2>
-
             <h3>
                 <a href="{% url 'entry-detail' entry.id %}">
-                   {{ entry.title }}
+                    {{ entry.title }}
                 </a>
             </h3>
         </article>
     {% endfor %}
 {% endblock %}
+
+
+
+
+
