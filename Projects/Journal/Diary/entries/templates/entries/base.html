@@ -1,5 +1,4 @@
-{% load static %}
-<!DOCTYPE html>
+{% load static %} <!-- allows you to reference static files. In this instance, connecting to CSS file -->
 <html lang="en">
 
 <head>
@@ -9,7 +8,7 @@
 </head>
 
 <body>
-    <h1><a href="/">Dear diary …</a></h1>
+    <h1><a href="/">Dear Diary …</a></h1>
 
     {% if messages %}
 	    <ul class="messages">

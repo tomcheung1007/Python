@@ -1,8 +1,8 @@
 <!-- entries/templates/entries/entry_list.html -->
 
-{% extends "entries/base.html" %}
+{% extends "entries/base.html" %} <!-- connects to (PARENT) base template -->
 
-{% block content %}
+{% block content %} <!-- start -->
     <article>
         <h2 class="mark">{% now "Y-m-d H:i" %}</em></h2>
         <a href="{% url 'entry-create' %}"><button>Add new entry</button></a>
@@ -19,9 +19,12 @@
             </h3>
         </article>
     {% endfor %}
-{% endblock %}
+
+{% endblock %} <!-- end -->
 
 
-
-
+<!-- the block tag highlights the section of code that a child template can override -->
+<!-- this means the code within the block will inherit the HTML structure and styling from parent template -->
+<!-- remember, our base (PARENT) template has HTML and reference to CSS stylesheet -->
+<!-- e.g. note how tags such as h2, h3 and a feature on our static file static/css/diary.css -->
 

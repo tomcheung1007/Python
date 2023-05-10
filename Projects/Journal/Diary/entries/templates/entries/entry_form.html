@@ -1,9 +1,9 @@
 <!-- entries/templates/entries/entry_form.html -->
 
-{% extends "entries/base.html" %}
+{% extends "entries/base.html" %}  <!-- connects to (PARENT) base template -->
 {% block content %}
     <form method="post">{% csrf_token %}
-        {{ form.as_p }}
+        {{ form.as_p }}  <!-- one way to render form -->
         <input type="submit" value="Save">
     </form>
     {% if entry %}

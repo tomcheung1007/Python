@@ -1,6 +1,6 @@
 <!-- entries/templates/entries/entry_confirm_delete.html -->
 
-{% extends "entries/base.html" %}
+{% extends "entries/base.html" %} <!-- connects to (PARENT) base template -->
 {% block content %}
     <form method="post">{% csrf_token %}
         <p>

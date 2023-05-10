@@ -108,22 +108,8 @@ def longest_consec(strarr, k):
 
 
 # print(longest_consec(["it", "wkppv", "ixoyx", "3452", "zzzzzzzzzzzz"], 3))
-def wave(people):
-    """return variation string with uppercase character moving left to right"""
-    result = []
-    chars = list(people)  # convert string to list for mutability
-    print(chars)
-
-    # for loop: each iteration, make copy of list, convert letter to uppercase, append to result
-    for i, _ in enumerate(chars):
-        if _.isalpha():
-            copy = chars[:]  # create copy of list
-            copy[i] = copy[i].upper()  # convert iterated letter to uppercase
-            result.append("".join(copy))
-    return result
 
 
-# print(wave(" gap "))
 def expanded_form(num):
     """Return integer in expanded form (string) e.g. 22 >>> 20 + 2"""
     num_list = []
@@ -475,32 +461,36 @@ def in_array(array1, array2):
 
 
 # print(in_array(["live", "arp", "strong"], ["lively", "alive", "harp", "sharp", "armstrong"]))
-def max_tri_sum(numbers):
-    num_list = list(dict.fromkeys(sorted(numbers, reverse=True)))
-    return sum(num_list[:3])
-
-
-# print(max_tri_sum([2,1,8,0,6,4,8,6,2,4]))
 def alternate_case(s):
+    """return updated string where upper case becomes lower case and vice versa """
     return "".join([_.lower() if _.isupper() else _.upper() for _ in s])
 
 
-# print(alternate_case("cODEwARS"))
+#print(alternate_case("cODEwARS"))
 def tower_builder(n_floors):
-    x = (2*n_floors)-1
+    """return tower made of * based on n floors"""
+    x = (2*n_floors)-1  # total number of * on bottom floor
     star = "*"
     space = " "
+
+    # star will always start with 1 and increase by 2 until it reaches x i.e. 1, 3, 5, 7
+    # space will do reverse. start with x-1 and decrease by 2 i.e. 6, 4, 2
     result = [f"{space * ((x-_)//2)}{star*_}{space * ((x-_)//2)}" for _ in range(1, x+1, 2)]
 
     return result
 
 
-# print(tower_builder(2))
+# print(tower_builder(4))
 def rot13(message):
+    """return ciphered string where a-z characters are replaced by the character 13 steps ahead of original character """
     print(f"MESSAGE : {message}")
     result = []
-    upper = [_ for _ in range(len(message)) if message[_].isupper()]
+    upper = [_ for _ in range(len(message)) if message[_].isupper()]  # store index position of any upper case character
 
+    # characters that are upper case must maintain their upper case when returned
+    # special characters and numbers remain unchanged
+
+    # for loop to store chr() of each character as lower case
     for _ in message:
         if _.isalpha():
             if _.isupper():
@@ -519,12 +509,13 @@ def rot13(message):
                     c -= 13
                 result.append(chr(c+96))
 
+        # anything other than alpha i.e. num and special character >> append to result
         elif _ == " ":
             result.append(" ")
         else:
             result.append(_)
 
-
+    # bring back upper case character to result
     if upper:
         for _ in upper:
             c = result[_]
@@ -534,84 +525,54 @@ def rot13(message):
     return f"CIPHERED : {''.join(result)}"
 
 
-# print(rot13(Test))
-
-
+# print(rot13("Test"))
 def dirReduc(arr):
-    print(arr)
-    for _ in range(len(arr) - 1):
-        if arr[_] == "NORTH":
-            if arr[_ + 1] == "SOUTH":
-                arr[_], arr[_ + 1] = "X", "X"
-
-        elif arr[_] == "SOUTH":
-            if arr[_ + 1] == "NORTH":
-                arr[_], arr[_ + 1] = "X", "X"
-
-        elif arr[_] == "WEST":
-            if arr[_ + 1] == "EAST":
-                arr[_], arr[_ + 1] = "X", "X"
-
-        elif arr[_] == "EAST":
-            if arr[_ + 1] == "WEST":
-                arr[_], arr[_ + 1] = "X", "X"
-
-
-    result = [_ for _ in arr if _ != "X"]
-
-    for _ in range(len(result) - 1):
-        if result[_] == "NORTH":
-            if result[_ + 1] == "SOUTH":
-                result[_], result[_ + 1] = "X", "X"
-
-        elif result[_] == "SOUTH":
-            if result[_ + 1] == "NORTH":
-                result[_], result[_ + 1] = "X", "X"
-
-        elif result[_] == "WEST":
-            if result[_ + 1] == "EAST":
-                result[_], result[_ + 1] = "X", "X"
-
-        elif result[_] == "EAST":
-            if result[_ + 1] == "WEST":
-                result[_], result[_ + 1] = "X", "X"
-
-    result = [_ for _ in result if _ != "X"]
-
-    for _ in range(len(result) - 1):
-        if result[_] == "NORTH":
-            if result[_ + 1] == "SOUTH":
-                result[_], result[_ + 1] = "X", "X"
-
-        elif result[_] == "SOUTH":
-            if result[_ + 1] == "NORTH":
-                result[_], result[_ + 1] = "X", "X"
-
-        elif result[_] == "WEST":
-            if result[_ + 1] == "EAST":
-                result[_], result[_ + 1] = "X", "X"
-
-        elif result[_] == "EAST":
-            if result[_ + 1] == "WEST":
-                result[_], result[_ + 1] = "X", "X"
-
-
-    return [_ for _ in result if _!= "X"]
-opposite = {'NORTH': 'SOUTH', 'EAST': 'WEST', 'SOUTH': 'NORTH', 'WEST': 'EAST'}
-# https://www.codewars.com/kata/550f22f4d758534c1100025a/solutions/python
-def dirReduc_V2(arr):
+    opposite = {'NORTH': 'SOUTH', 'EAST': 'WEST', 'SOUTH': 'NORTH', 'WEST': 'EAST'}
     print(arr)
     new_plan = []
 
     for d in arr:
         if new_plan and new_plan[-1] == opposite[d]:
-            print(f"new_plan:{new_plan}, new_plan[_-1]{new_plan[-1]}, opposite {opposite[d]}")
             new_plan.pop()
-            print(new_plan, "POP")
         else:
             new_plan.append(d)
-            print(new_plan, "ADD")
     return new_plan
 
 
-# print(dirReduc_V2(['NORTH', 'SOUTH', 'SOUTH', 'EAST', 'WEST', 'NORTH', 'WEST']))
+# print(dirReduc(['NORTH', 'SOUTH', 'SOUTH', 'EAST', 'WEST', 'NORTH', 'WEST']))
+def wave(people):
+    """simulate mexican wave with upper case character through string"""
+    result = []  # to store iterations of mexican wave string
+    people = list(people)  # working with list because mutable
+
+    # for each iteration, make a copy and replace character with upper
+    for i, _ in enumerate(people):
+        if _ == " ":
+            continue
+        copy = people[:]
+        copy[i] = copy[i].upper()
+        result.append("".join(copy))
+
+    return result
+
+
+# print(wave("two words"))
+
+
+def roman_numerals_encoder(n):
+    """translate number to roman numerals"""
+    roman_numerals = {1000:"M", 900:"CM", 500:"D", 400:"CD", 100:"C", 90:"XC", 50:"L",
+                      40:"XL", 10:"X", 9:"IX", 5:"V", 4:"IV", 1:"I"}
+    result = ""  # to return as output
+
+    # for each key, while n is greater than iterated key, append value to roman numerals, deduct from n
+    for _ in roman_numerals.keys():
+        while n >= _:
+            print(_)
+            result += roman_numerals[_]
+            n -= _
+
+    return result
+
+
+print(roman_numerals_encoder(269))
