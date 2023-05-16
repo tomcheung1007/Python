@@ -5,10 +5,13 @@
 # with web apps, there are four essential operations referred to as CRUD
 # (C)reate, (R)ead, (U)pdate, (D)elete
 
+# ______________________________________
 # **CHECKPOINT**
 # similar to before when setting up the ability to list and read entries.
 # you will do the same for the other CRUD features
 # 1. add views. 2. create templates and extend to base (PARENT) template. 3. Create URLs
+# ______________________________________
+
 
 # ADD VIEWS
 # see entries/views.py
@@ -28,9 +31,14 @@
 # see entries/urls
 
 
+# ______________________________________
 # **SUMMARY**
 # you can now create, read, update and delete entries directly in the front end.
 # overall, the same process was required:
 # 1. add views
 # 2. create templates and extend to base (PARENT) template
 # 3. create URLs
+# next step is to enhance the user experience by giving back feedback
+# e.g. confirmation of entry deleted or updated
+# ______________________________________
+

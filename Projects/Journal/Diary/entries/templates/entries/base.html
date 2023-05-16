@@ -10,7 +10,8 @@
 <body>
     <h1><a href="/">Dear Diary …</a></h1>
 
-    {% if messages %}
+	<!-- messages are stored in the message storage. By looping through it, you can access them -->
+    {% if messages %} <!-- conditional formatting -->
 	    <ul class="messages">
 	    {% for message in messages %}
 	        <li class="message">

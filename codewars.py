@@ -575,4 +575,42 @@ def roman_numerals_encoder(n):
     return result
 
 
-print(roman_numerals_encoder(269))
+# print(roman_numerals_encoder(269))
+
+
+import re
+def domain_name(url):
+    result = [_ for _ in url.split(".")]
+
+    mo = re.search(r"www", url)
+    mo_2 = re.search(f"//", url)
+
+    if mo:
+        return result[1]
+    elif mo_2:
+        http = [_ for _ in result[0].split("/")]
+        return http[-1]
+    else:
+        return result[0]
+
+
+# print(domain_name("http://www.kdpszzdxcd4k2.name/error"))
+
+
+def title_case(title, minor_words=''):
+    result = title.title().split()
+    minor_words = minor_words.lower().split()
+
+    for _ in range(len(result)):
+        if _ == 0:
+            pass
+        elif result[_].lower() in minor_words:
+            result[_] = result[_].lower()
+
+    return " ".join(result)
+
+
+test = "a clash of KINGS"
+x = "a an the OF"
+print(title_case(test, x))
+
