@@ -23,6 +23,7 @@ def valid_pw_character():
     """validate input for type of characters in password and returns dict"""
     character_type = {"upper":False, "lower":False, "number":False, "special":False}
 
+    # UPPER CASE
     while True:
         upper = input("Upper case characters in password?\tEnter Y or N:\t")
         if upper[0].lower() not in ["y", "n"]:
@@ -34,6 +35,7 @@ def valid_pw_character():
             character_type["upper"] = False
             break
 
+    # LOWER CASE
     while True:
         upper = input("Lower case characters in password?\tEnter Y or N:\t")
         if upper[0].lower() not in ["y", "n"]:
@@ -45,6 +47,7 @@ def valid_pw_character():
             character_type["lower"] = False
             break
 
+    # NUMBERS
     while True:
         upper = input("Number characters in password?\tEnter Y or N:\t")
         if upper[0].lower() not in ["y", "n"]:
@@ -56,6 +59,7 @@ def valid_pw_character():
             character_type["number"] = False
             break
 
+    # SPECIAL CHARACTERS
     while True:
         upper = input("Special characters in password?\tEnter Y or N:\t")
         if upper[0].lower() not in ["y", "n"]:
@@ -72,8 +76,9 @@ def valid_pw_character():
 
 def quant_character(character_dict, pw_length):
     """takes dict of character types and takes quantity of each character type"""
-    x = {}
+    x = {}  # to store character type : quantity
 
+    # loop to get quantity of each selected character type
     for k, v in character_dict.items():
         if v:
             while True:
@@ -93,6 +98,7 @@ def create_pw(character_dict):
     """return random characters based on character type and quantity"""
     result = []
 
+    # loop to get characters of each selected type and quantity
     for k, v in character_dict.items():
         if k == "upper":
             random_upper = random.choices(string.ascii_uppercase, k=v)
@@ -138,7 +144,7 @@ def password_generator():
         print(create_pw(quant_character(valid_pw_character(),valid_pw_length())))
 
 
-        if not replay():
+        if not replay():  # if return False >>> break
             break
 
 

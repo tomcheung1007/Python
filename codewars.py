@@ -612,5 +612,34 @@ def title_case(title, minor_words=''):
 
 test = "a clash of KINGS"
 x = "a an the OF"
-print(title_case(test, x))
 
+
+# print(title_case(test, x))
+
+arr_1 = ['cod', 'code', 'wars', 'ewar', 'ar']
+arr_2 = ['lively', 'alive', 'harp', 'sharp', 'armstrong', 'codewars']
+
+result = set()
+z = [x for x in arr_1 if x in arr_2]
+
+for x in arr_1:
+    for y in arr_2:
+        if x in y:
+            result.add(x)
+
+# print(list(sorted(result)))
+
+
+# 1. move first letter of each work to end
+
+
+def pig_it(text):
+    first_letter = [f"{_[0]}ay" if _.isalpha() else _ for _ in text.split(" ")]
+    word = [_[1:] for _ in text.split(" ")]
+
+    comp = [x+y for x, y in zip(word, first_letter)]
+
+    return " ".join(comp)
+
+
+print(pig_it("O tempora o mores !"))
